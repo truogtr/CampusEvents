@@ -1,0 +1,25 @@
+
+
+
+#attendees-list {
+	/*display: none;*/
+}
+
+table.fixed {table-layout:fixed; width:700px;}
+
+/*table.fixed .header {display: table-header-group;}*/
+
+
+/*
+table.fixed td {overflow:hidden;}
+
+table.fixed th:nth-of-type(1) {width:500px; float:left;}
+table.fixed th:nth-of-type(2) {width:250px;,  float:left;}
+table.fixed th:nth-of-type(3) {width:250px;
+
+
+table.fixed td:nth-of-type(1) {width:500px;}
+
+table.fixed td:nth-of-type(2) {width:250px;}
+table.fixed td:nth-of-type(3) {width:250px;}
+*/

@@ -1,0 +1,23 @@
+
+$(document).ready(function() {
+
+
+	//$('th').remove();
+
+	//$('table.listing').remove();
+	//$('tr').remove();
+	//$('td').remove();
+	
+	
+
+	/*
+	$('tr.odd').remove();
+	$('tr.even').remove();
+	$('td#event-name').remove();
+	$('td#event-date').remove();
+	$('td.actions').remove();
+*/
+
+	$('.events-list').html("<%= j render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>");
+
+});

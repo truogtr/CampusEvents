@@ -1,0 +1,22 @@
+
+    
+ <table class="fixed">
+  <tr class="header">
+  <!-- <th>&nbsp;</th> -->
+      <th>Event Name</th>
+      <th>Date and Time</th>
+      <th>Actions</th>
+    </tr>
+ 
+
+  <div>
+    
+ <% @filtered.each do |event| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td id = 'event-name'><%= event.event_name %></td>
+      <td id = 'event-date'><%= event.start_time.strftime("%B %d, '%y at %I:%M") %></td>
+      <td class="actions"> <%= link_to("More Information", event_path(event.id), :class => 'action show') %> </td>
+    </tr>
+    <% end %>
+  
+  </div>

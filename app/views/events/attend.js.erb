@@ -1,0 +1,12 @@
+
+
+
+$(document).ready(function() {
+
+$('#attendees-list').html("<%= j render(:partial => 'attendees_list', :locals => { :attendees => @attendees }) %>");
+//$("#calendar").fullCalendar( 'refetchEvents' );
+//$("#calendar").fullCalendar( 'refresh' );
+//console.log(location + "LOCATION")
+//('http://localhost:3000/users/2').reload();
+
+});

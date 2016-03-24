@@ -1,0 +1,46 @@
+
+
+<% @page_title = "Events" %>
+<div><%= link_to("Back To My Homepage", user_path(session[:user_id])) %></div>
+<div><%= link_to("Create an Event", new_event_path) %></div>
+
+<div class="events index">
+  
+  <h2>Events On Campus</h2>
+
+  <h1> Filter Events By Category </h1>
+  <table>
+    <tr>
+      <td> <%= button_to "All", filter_events_path, :remote => true, name: "cat"%> </td>
+      <td> <%= button_to "Social", filter_events_path, :remote => true, name: "cat"%> </td>
+      <td> <%= button_to "Academic", filter_events_path, :cat => 2, :remote => true, name: "cat" %> </td>
+      <td> <%= button_to "Sports and Recreation", filter_events_path, :cat => 3, :remote => true, name: "cat" %> </td>
+      <td> <%= button_to "Arts", filter_events_path, :cat => 4, :remote => true, name: "cat" %> </td>
+      <td> <%= button_to "Religion", filter_events_path, :cat => 5, :remote => true, name: "cat" %> </td>
+    </tr>
+  </table>
+
+
+  <div><%#= pluralize(@events.size, 'event') %></div>
+
+  <div class = 'events-list'>
+    <table class="fixed">
+      <tr class="header">
+      <!-- <th>&nbsp;</th> -->
+        <th>Event Name</th>
+        <th>Date and Time</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @events.each do |event| %>
+      <tr class="<%= cycle('odd', 'even') %>">
+        <td id = 'event-name'><%= event.event_name %></td>
+        <td id = 'event-date'><%= event.start_time.strftime("%B %d, '%y at %I:%M") %></td>
+        <td class="actions"> <%= link_to("More Information", event_path(event.id), :class => 'action show') %> </td>
+      </tr>
+      <% end %>
+    
+    </table>
+  </div>
+
+</div>

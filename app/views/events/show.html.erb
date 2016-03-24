@@ -1,0 +1,33 @@
+
+<%= link_to("<< Back to List", events_path, :class => 'back-link') %>
+
+<h1>Event Details</h1>
+ <% #Rails.cache.clear %>
+ <% #cache @user_object do %>
+<% creator = User.find(@event.creator_id) %>
+
+<p><%= "Event Name: #{@event.event_name}" %></p>
+<p><%= @event.start_time.strftime("%B %d, '%y at %I:%M") %></p>
+<p><%= @event.end_time.strftime("%B %d, '%y at %I:%M") %></p>
+<p><%= "Event Category: #{@event.category}" %></p>
+<p><%= "Event Description: #{@event.event_description}" %></p>
+<p><%= "Creator: "%><%= link_to "#{creator.first_name} #{creator.last_name}", creator %></p>
+<p><%= "Attendees: " %></p>
+
+
+<span id = 'attendees-list'>
+
+<% attendees = @event.users %>
+
+	<%= render(:partial => 'attendees_list', :locals => { :attendees => attendees }) %>
+
+</span>
+
+ 
+<% button_text = "Attend Event" %>
+<% if @event.users.include?(@user) %>
+<% button_text = "Unattend Event" %>
+<% end %>
+
+
+<%= button_to button_text, attend_event_path(@event), :remote => true,  :id => "attend" %>

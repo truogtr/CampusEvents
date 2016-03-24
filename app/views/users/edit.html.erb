@@ -1,0 +1,22 @@
+<h1>Users#edit</h1>
+<p>Find me in app/views/users/edit.html.erb</p>
+
+
+<% s3 = AWS::S3.new(:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      										:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']) %>
+      <% bucket = s3.buckets[ENV['AWS_BUCKET']] %>
+
+<%= form_for(@user, multipart: true, :bucket => bucket) do |f| %>
+		<table>
+		  <tr>
+		  	<td><%= f.label :avatar %><br/></td>
+		  	<td><%= f.file_field :avatar %></td>
+		  	<td><%= f.submit("Upload Image") %></td>
+		  </tr>
+	</table>
+
+<% end %>
+
+
+
+

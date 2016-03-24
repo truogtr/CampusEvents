@@ -1,0 +1,31 @@
+<%= error_messages_for(@user) %>
+
+<table summary="Event form fields">
+  <tr>
+    <th><%= f.label(:event_name) %></th>
+    <td><%= f.text_field(:event_name) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:location) %></th>
+    <td><%= f.text_field(:location) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:event_description) %></th>
+    <td><%= f.text_area(:event_description, :size => '40x10')%></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:start_time) %></th>
+    <td><%= f.datetime_select(:start_time, ampm: true, minute_step: 15, start_year: Time.new.year,
+                              end_year: Time.new.year+1, :order => [:month, :day, :year]) %></td>
+  </tr>
+   <tr>
+    <th><%= f.label(:end_time) %></th>
+    <td><%= f.datetime_select(:end_time, ampm: true, minute_step: 15, start_year: Time.new.year,
+                              end_year: Time.new.year+1, :order => [:month, :day, :year]) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:category) %></th>
+    <td><%= f.select(:category, ['Social', 'Academic',
+     'Sports and Recreation', 'Arts', 'Religion']) %></td>
+  </tr>
+</table>

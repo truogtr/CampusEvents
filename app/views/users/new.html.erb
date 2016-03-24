@@ -1,0 +1,17 @@
+<% @page_title = 'Create New Account' %>
+
+<%= link_to("Back to Login", root_path, :class => 'back-link') %>
+
+<div class="user new">
+  <h2>Create Account</h2>
+
+  <%= form_for(@user) do |f| %>
+
+    <%= render(:partial => 'form', :locals => {:f => f} ) %>
+
+    <div class="form-buttons">
+      <%= submit_tag('Create Account') %>
+    </div>
+
+  <% end %>
+</div>

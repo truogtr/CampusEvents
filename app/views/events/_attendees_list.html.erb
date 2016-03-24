@@ -1,0 +1,5 @@
+<% attendees.each do |a| %>
+     <% attendee_name = "#{a.first_name} #{a.last_name}"%>
+     <% attendee_name += "," unless a == attendees.last %>
+     <%= link_to attendee_name, a %>
+<% end %>
