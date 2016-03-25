@@ -1,8 +1,10 @@
 class Event < ActiveRecord::Base
 
+  # relate events to users
 	has_and_belongs_to_many :users
 
 
+  # Commented out junk that didn't work
 	# scope :between, lambda {|start_time, end_time| {:conditions => ["? < starts_at and starts_at < ?", Event.format_date(start_time), Event.format_date(end_time)] }}
 
 

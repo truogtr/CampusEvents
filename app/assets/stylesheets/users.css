@@ -5,6 +5,7 @@
 
 }
 
+/* prevent calendar links from changing colors after they are clicked */
 #calendar a:link{
   color:white;
 }

@@ -4,6 +4,7 @@
 $(document).ready(function() {
 
 
+//back-button stuff: doesn't work
 window.onbeforeunload = function() { 
 
 	//$('#calendar').fullCalendar('removeEvents');
@@ -14,12 +15,12 @@ window.onbeforeunload = function() {
 	//$("#calendar").fullCalendar( 'refetchEvents' );
 	//$("#calendar").fullCalendar( 'refresh' );
 
-	console.log("Your work will be lost."); 
+	//console.log("Your work will be lost."); 
 
 };
 
 
-
+	// change button text when attend button is clicked
 	$('#attend').on("click", function() { 
 		var button_text = document.getElementById("attend");
 	  if (button_text.value=="Attend Event") button_text.value = "Unattend Event";

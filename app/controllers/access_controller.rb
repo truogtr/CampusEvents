@@ -2,10 +2,13 @@ class AccessController < ApplicationController
 
 
 	layout 'application'
+
+  # display login page
 	def login
 		#login form
 	end
 
+# attempt to login and logout (similar to in Exercise Files)
 def attempt_login
     if params[:email].present? && params[:password].present?
       found_user = User.where(:email => params[:email]).first

@@ -1,3 +1,5 @@
+
+ <!-- Partial that displays the updated list of attendees -->
 <% attendees.each do |a| %>
      <% attendee_name = "#{a.first_name} #{a.last_name}"%>
      <% attendee_name += "," unless a == attendees.last %>

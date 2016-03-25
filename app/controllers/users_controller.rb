@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   
+  # this uses views/layouts.application.html.erb which links the asset folder
+  # we should probably contain this so that we have differnt user and an event layouts.
 	layout 'application'
 
 	before_action :confirm_logged_in, :except => [:new, :create]
 
+  # All is pretty much the same as Excercise Files
   def index
     #@user = User.find(session[:user_id])
   end

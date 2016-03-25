@@ -7,7 +7,7 @@
 <div class="events index">
   
   <h2>Events On Campus</h2>
-
+  <!-- Create filter buttons. Handled in filter actions -->
   <h1> Filter Events By Category </h1>
   <table>
     <tr>
@@ -22,7 +22,8 @@
 
 
   <div><%#= pluralize(@events.size, 'event') %></div>
-
+   <!-- Display Events table (same as Pages index display in Exercise Files)
+        todo: We should probably render the _filtered_events partial here for DRY code -->
   <div class = 'events-list'>
     <table class="fixed">
       <tr class="header">

@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
 
-
+	
 	//$('th').remove();
 
 	//$('table.listing').remove();
@@ -17,7 +17,11 @@ $(document).ready(function() {
 	$('td#event-date').remove();
 	$('td.actions').remove();
 */
-
+	
+	// Javascript that replaces the events list with the list of filtered events
+	// This file is automatically called when respond_to block in filter action is executed
+	// ATfiltered variable is passed here from the filter action in the controller
+	// the partial is rendered in the events-list html tag
 	$('.events-list').html("<%= j render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>");
 
 });

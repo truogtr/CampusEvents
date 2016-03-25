@@ -1,9 +1,12 @@
 class User < ActiveRecord::Base
 
+  # for encryption as in Exercise Files
 	has_secure_password
 
+  # Relate users to events
   has_and_belongs_to_many :events
 
+  # For images
   has_attached_file :avatar, 
     styles: {
       tiny:  '25x25#',
@@ -14,6 +17,7 @@ class User < ActiveRecord::Base
     },
     :default_style => :small
 
+
 	#EMAIL_REGEX = /\A[a-z0-9._%+-]+@middlebury.edu\Z/i
 
 	validates :first_name, :presence => true,
@@ -22,10 +26,11 @@ class User < ActiveRecord::Base
                         :length => { :maximum => 50 }
   validates :email, :presence => true,
                     :length => { :maximum => 100 },
-                    #:format => EMAIL_REGEX,
+                    #:format => EMAIL_REGEX,  # Commented out for testing
                     :uniqueness => true#,
                     #:confirmation => true
 
+  # required validation for images
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 end

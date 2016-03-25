@@ -1,11 +1,12 @@
 <h1>Users#edit</h1>
 <p>Find me in app/views/users/edit.html.erb</p>
 
-
+ <!-- I don't think this is necessary code at the moment -->
 <% s3 = AWS::S3.new(:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       										:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']) %>
       <% bucket = s3.buckets[ENV['AWS_BUCKET']] %>
 
+ <!-- Code from website that uploads an image -->
 <%= form_for(@user, multipart: true, :bucket => bucket) do |f| %>
 		<table>
 		  <tr>
