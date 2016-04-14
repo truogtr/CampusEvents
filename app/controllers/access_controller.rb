@@ -1,7 +1,7 @@
 class AccessController < ApplicationController
 
 
-	layout 'application'
+	layout 'access'
 
   # display login page
 	def login

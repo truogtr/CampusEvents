@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>CampusEvents | <%= @page_title || "Login" %></title>
+  <!-- TODO what does the below do? -->
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+  <%= stylesheet_link_tag 'access_style' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body >
+
+    <% if !flash[:notice].blank? %>
+        <div class="notice">
+            <%= flash[:notice] %>
+            <br><br>
+        </div>
+    <% end %>
+
+    <%= yield %>
+
+</body>
+</html>

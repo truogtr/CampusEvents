@@ -1,0 +1,9 @@
+.profile_header {
+    text-align: left;
+    border-spacing: 30px 5px;  /* horizontal, vertical */
+}
+
+.notice {
+    color: navy;
+    font-weight: bold;
+}
