@@ -2,18 +2,29 @@
 <html>
 <head>
 
-  <title>CampusEvents</title>
+  <!-- TODO get default title here -->
+  <title>CampusEvents | <%= @page_title || "Default title" %></title>
+  <!-- TODO what does the line below do? -->
+
   <%= stylesheet_link_tag    'application', media: 'all'%>
+  <%= stylesheet_link_tag 'application_style' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body >
-
     <% if !flash[:notice].blank? %>
         <div class="notice">
             <%= flash[:notice] %>
+            <br><br>
         </div>
     <% end %>
+
+    <div>
+        <%= link_to("My Profile", user_path(session[:user_id])) %> |
+        <%= link_to("Create an Event", new_event_path) %> |
+        <%= link_to("View Events", events_path) %> |
+        <%= link_to "Sign out", :controller => 'access', :action => 'logout' %>
+    </div>
 
     <%= yield %>
 

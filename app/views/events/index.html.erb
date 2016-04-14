@@ -1,11 +1,9 @@
 
 
 <% @page_title = "Events" %>
-<div><%= link_to("Back To My Homepage", user_path(session[:user_id])) %></div>
-<div><%= link_to("Create an Event", new_event_path) %></div>
 
 <div class="events index">
-  
+
   <h2>Events On Campus</h2>
   <!-- Create filter buttons. Handled in filter actions -->
   <h1> Filter Events By Category </h1>
@@ -40,7 +38,7 @@
         <td class="actions"> <%= link_to("More Information", event_path(event.id), :class => 'action show') %> </td>
       </tr>
       <% end %>
-    
+
     </table>
   </div>
 

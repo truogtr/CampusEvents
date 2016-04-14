@@ -72,8 +72,6 @@ class EventsController < ApplicationController
     @event.users << @creator
     if @event.save
       flash[:notice] = 'Event created.'
-	  # TODO how to get flash hash to show up in event_path
-	  # see http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
       redirect_to event_path(@event.id)
     else
       render("new")
