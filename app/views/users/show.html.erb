@@ -1,17 +1,23 @@
 <% @page_title = @user.first_name + "'s Profile" %>
 
-<h1>
-    <%= @user.first_name + " " + @user.last_name + "'s Profile" %>
-</h1>
-<h4> <%= link_to "Edit Profile", edit_user_path(@user) %> </h4>
-
+<!-- Users image: TODO: add defualt image-->
+<div class="profile_header">
+    <table class="profile_header">
+      <tr>
+        <td>
+            <%= image_tag @user.avatar.url(:thumb), :class => 'user_img' %>
+        </td>
+        <td>
+            <h1> <%= @user.first_name + " " + @user.last_name + "'s Profile" %> </h1>
+            <h4> <%= link_to "Edit Profile", edit_user_path(@user) %> </h4>
+        </td>
+      </tr>
+    </table>
+</div>
 
  <!--Where fullCalendar is inserted -->
   <!-- The show .json .jbuilder loads User's event information from database and
   		  formats it in a way that fullCalendar can understand. See fullCalendar tutorial -->
 <div id='calendar' data-calendar = '<%= @user.id %>'></div>
-
- <!-- Users image: todo: add defualt image-->
-<%= image_tag @user.avatar.url(:thumb), :class => 'user_img' %>
 
  <!--todo: make this page nicer: perhaps move calendar to a different page and display the rest of the user info -->
