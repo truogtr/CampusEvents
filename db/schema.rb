@@ -49,9 +49,4 @@ ActiveRecord::Schema.define(version: 20160315222449) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "users_events_joins", id: false, force: :cascade do |t|
-    t.integer "user_id",  limit: 4
-    t.integer "event_id", limit: 4
-  end
-
 end

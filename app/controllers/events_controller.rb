@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  
+
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
 	layout 'application'
@@ -8,8 +8,11 @@ class EventsController < ApplicationController
   # get events ordered by start time for index page
   def index
   	@events = Event.order(:start_time)
+    # TODO filter here (or with javascript on page?, no, better here, once
+    # there's a lot of data) to only get the ones with end_time after right
+    # now.
 
-     #@events = Event.between(params['start'], params['end']) if (params['start'] && params['end']) 
+     #@events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])
 
   end
 
@@ -25,7 +28,7 @@ class EventsController < ApplicationController
 
     if cat == "Social"
       @filtered = Event.where(:category => "Social")
-     
+
     elsif cat == "Academic"
       @filtered = Event.where(:category => "Academic")
     elsif cat == "Sports and Recreation"
@@ -69,9 +72,14 @@ class EventsController < ApplicationController
     @event.users << @creator
     if @event.save
       flash[:notice] = 'Event created.'
+	  # TODO how to get flash hash to show up in event_path
+	  # see http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
       redirect_to event_path(@event.id)
     else
       render("new")
+      # TODO does this reload the new template with the same fields as
+      # previously entered, so students don't have to rewrite everything
+      # about their events?
     end
   end
 
@@ -88,11 +96,11 @@ class EventsController < ApplicationController
 
     #Rails.cache.clear
     #Rails.logger.debug("!!!!cache clear")
- 
+
 
   	@event = Event.find(params[:id])
   	@attendee = User.find(session[:user_id])
-   
+
     # add or remove user when button is clicked
     # based on whether or not the user is currently an attendee
     if @event.users.exclude?(@attendee)
@@ -112,10 +120,13 @@ class EventsController < ApplicationController
   end
 
 
-  private 
+  private
 
-  # params for a new event
+  # for strong params for a new event
   def event_params
+    # same as using "params[:event]", except that it:
+    # - raises and error if :event is not present
+    # - allows listed attributes to be mass assigned
     params.require(:event).permit(:event_name, :location, :event_description,
       :start_time, :end_time, :category)
   end

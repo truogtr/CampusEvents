@@ -1,5 +1,15 @@
 == README
 
+Made with lots of help from this tutorial at Lynda.com, by Kevin Skoglund:
+http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
+
+TODO
+
+* redirect pages or somehow show a good error when forms fail
+* confirm that user wants to leave the page if they've entered text w/o
+  submitting a form and want to exit/go back/take a link away from the page
+* make sure layouts in controllers are what we want them to be
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
