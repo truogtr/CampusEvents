@@ -1,11 +1,72 @@
 
 
 
+
+
+/*
+table.fixed {table-layout:fixed; width:700px;}
+*/
+#col1 {width: 225px;}
+#col2 {width: 180px;}
+#col3 {width: 120px;}
+
+
+.filter-btns input {
+    background-color:transparent;
+     border: solid 1px #20538D;
+    border-radius: 4px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+     background: #4479BA;
+    color: #FFF;
+    padding: 10px 15px;
+}
+
+.filter-btns input:hover, .filter-btns input:focus {
+    background: #356094;
+    border: solid 1px #2A4E77;
+    text-decoration: none;
+}
+
+.odd, .odd a { background: #4479BA;
+			 color:white; }
+
+.even, .even a { background: none;
+				color: black; }
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+#header { clear: both; text-align: left;
+  color: #F2DC87; }
+
+
+/*
+ .button_to {
+
+	font-weight: bold;
+	border-width: 1px;
+	border-style: solid;
+	outline:none;
+	background: white;
+
+}
+*/
+
+
+/*
+
+.filter-btns td {
+	{
+    padding: 10px 15px;
+    background: #4479BA;
+    color: #FFF;
+}
+*/
 #attendees-list {
 	/*display: none;*/
 }
 
-table.fixed {table-layout:fixed; width:700px;}
+
 
 /*table.fixed .header {display: table-header-group;}*/
 

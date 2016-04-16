@@ -38,7 +38,10 @@ gem 'momentjs-rails'
 
 gem 'fullcalendar-rails'
 
-gem 'jquery_mobile_rails'
+gem 'sunspot_rails', '~> 2.2.5'
+gem 'sunspot_solr'
+
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

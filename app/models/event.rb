@@ -1,7 +1,14 @@
 class Event < ActiveRecord::Base
-
   # relate events to users
-	has_and_belongs_to_many :users
+  has_and_belongs_to_many :users
+
+
+  
+  searchable do
+    text :event_name 
+  end
+
+
 
 
   # Commented out junk that didn't work

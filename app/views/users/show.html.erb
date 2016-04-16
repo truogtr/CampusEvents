@@ -5,7 +5,9 @@
     <table class="profile_header">
       <tr>
         <td>
-            <%= image_tag @user.avatar.url(:thumb), :class => 'user_img' %>
+            
+            <%= image_tag @user.avatar.url(:medium), :class => 'user_img' %>
+          
         </td>
         <td>
             <h1> <%= @user.first_name + " " + @user.last_name + "'s Profile" %> </h1>

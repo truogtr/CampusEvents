@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
-	layout 'application'
+	layout 'users'
 
 	before_action :confirm_logged_in, :except => [:new, :create]
 
@@ -17,7 +17,13 @@ class UsersController < ApplicationController
   end
 
   def new
+
   	@user = User.new
+
+
+    respond_to do |format|
+      format.html { render :layout => 'access' } 
+    end
   end
 
   def create
@@ -63,7 +69,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name,
-      :email, :password)
+      :email, :password, :password_confirmation)
   end
 
 

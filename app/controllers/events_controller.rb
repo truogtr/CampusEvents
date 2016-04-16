@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
-	layout 'application'
+	layout 'events'
 
 
   # get events ordered by start time for index page
@@ -14,6 +14,23 @@ class EventsController < ApplicationController
 
      #@events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])
 
+  end
+
+   def search
+    
+    Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
+    @search = Event.search do
+      keywords(params[:query])
+    end
+
+    @filtered = @search.results
+  
+    respond_to do |format|
+      format.js
+      format.html {}
+      #format.html { render :action => "index" }
+      #format.xml  { render :xml => @search }
+    end
   end
 
   # filter events on index page
@@ -66,11 +83,15 @@ class EventsController < ApplicationController
   # create an event. Save its creator and params
   def create
     @event = Event.new(event_params)
-    @creator = User.find(session[:user_id])
+   @creator = User.find(session[:user_id])
 
     @event.creator_id = @creator.id
-    @event.users << @creator
+    
+
+    # Rails.logger.debug("****FOUND**** #{@event.users.first.first_name}")
+
     if @event.save
+      @event.users << @creator
       flash[:notice] = 'Event created.'
       redirect_to event_path(@event.id)
     else
