@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
 	layout 'events'
+  before_action :confirm_logged_in
 
 
   # get events ordered by start time for index page
@@ -41,7 +42,7 @@ class EventsController < ApplicationController
 
 
     @filtered = Event.order(:start_time)
-       # Rails.logger.debug("****CALLED**** #{params[:subaction]}")
+    
 
     if cat == "Social"
       @filtered = Event.where(:category => "Social")
@@ -83,7 +84,7 @@ class EventsController < ApplicationController
   # create an event. Save its creator and params
   def create
     @event = Event.new(event_params)
-   @creator = User.find(session[:user_id])
+    @creator = User.find(session[:user_id])
 
     @event.creator_id = @creator.id
     
@@ -104,8 +105,25 @@ class EventsController < ApplicationController
 
   # todo: edit
   def edit
+    @event = Event.find(params[:id])
   end
 
+  def update
+
+    @event = Event.find(params[:id])
+    if @event.update_attributes(event_params)
+      redirect_to event_path(@event)
+    else
+      render('edit')
+    end
+
+  end
+
+  def destroy
+     @event = Event.find(params[:id])
+    @event.delete
+    redirect_to events_path
+  end
   # todo: delete
   def delete
   end

@@ -1,22 +1,94 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
 
- <!-- I don't think this is necessary code at the moment -->
-<% s3 = AWS::S3.new(:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      										:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']) %>
-      <% bucket = s3.buckets[ENV['AWS_BUCKET']] %>
 
- <!-- Code from website that uploads an image -->
-<%= form_for(@user, multipart: true, :bucket => bucket) do |f| %>
+<div class="user edit">
+
+
+	<!-- Edit General Information -->
+
+	 <%= error_messages_for(@user) %>
+  <h2>Edit User Info</h2>
+
+  
+
+  <%= form_for(@user) do |f| %>
+
+
+ 
+	<table summary="User form fields">
+	  <tr>
+	    <th><%= f.label(:first_name) %></th>
+	    <td><%= f.text_field(:first_name) %></td>
+	  </tr>
+	  <tr>
+	    <th><%= f.label(:last_name) %></th>
+	    <td><%= f.text_field(:last_name) %></td>
+	  </tr>
+	  <tr>
+	    <th><%= f.label(:major) %></th>
+	    <td><%= f.text_field(:major) %></td>
+	  </tr>
+	   <tr>
+	    <th><%= f.label(:year) %></th>
+	    <td><%= f.select(:year, ['Freshman', 'Sophmore',
+	     'Junior', 'Senior']) %></td>
+	  </tr>
+	</table>
+
+  	<div class="form-buttons"><%= f.button  :submit , name: "subaction", value: "info"%></div>
+  <% end %>
+
+  <!-- Edit Picture -->
+   <h2>Edit Picture</h2>
+
+   <%= form_for(@user, multipart: true) do |f| %>
+
 		<table>
 		  <tr>
 		  	<td><%= f.label :avatar %><br/></td>
 		  	<td><%= f.file_field :avatar %></td>
-		  	<td><%= f.submit("Upload Image") %></td>
+
 		  </tr>
+
+	</table>
+		<div class="form-buttons"><%= f.button  :submit , name: "subaction", value: "picture"%></div>
+
+   <% end %>
+	<!-- Edit Password-->
+	 <h2>Edit Password</h2>
+
+	 <%= form_for(@user) do |f| %>
+
+
+   <table>
+	  <tr>
+	    <th><%= f.label(:password) %></th>
+	    <td><%= f.password_field(:password) %></td>
+	  </tr>
+	  <tr>
+	    <th><%= f.label(:password_confirmation) %></th>
+	    <td><%= f.password_field(:password_confirmation) %></td>
+	  </tr>
 	</table>
 
+	<div class="form-buttons"><%= f.button  :submit , name: "subaction", value: "pass"%></div>
+  <% end %>
+
+
+<%= button_to "Delete Account", {:controller => :users,
+      :action => 'destroy', :id => @user.id }, :method => :delete, data: { confirm: "Are you sure?" }  %>
+</div>
+
+
+
+
+
+<% if false %>
+
+
 <% end %>
+
+
+
 
 
 

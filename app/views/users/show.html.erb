@@ -11,7 +11,10 @@
         </td>
         <td>
             <h1> <%= @user.first_name + " " + @user.last_name + "'s Profile" %> </h1>
+            <p><%= "Year: #{@user.year}" %></p>
+            <p><%= "Major: #{@user.major}" %></p>
             <h4> <%= link_to "Edit Profile", edit_user_path(@user) %> </h4>
+
         </td>
       </tr>
     </table>

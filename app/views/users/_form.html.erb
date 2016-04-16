@@ -22,4 +22,17 @@
     <th><%= f.label(:password_confirmation) %></th>
     <td><%= f.password_field(:password_confirmation) %></td>
   </tr>
+ <tr>
+    <th><%= f.label(:major) %></th>
+    <td><%= f.text_field(:major) %></td>
+  </tr>
+   <tr>
+    <th><%= f.label(:year) %></th>
+    <td><%= f.select(:year, ['Freshman', 'Sophmore',
+     'Junior', 'Senior']) %></td>
+  </tr>
+    <tr>
+      <th><%= f.label :picture %><br/></th>
+      <td><%= f.file_field :avatar %></td>
+    </tr>
 </table>

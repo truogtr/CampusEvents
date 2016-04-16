@@ -14,6 +14,15 @@
 <p><%= "Event Category: #{@event.category}" %></p>
 <p><%= "Event Description: #{@event.event_description}" %></p>
 <p><%= "Creator: "%><%= link_to "#{creator.first_name} #{creator.last_name}", creator %></p>
+
+<% if @user.id == creator.id %>
+	<%= link_to "Edit Event", edit_event_path(@event) %></br>
+
+      <%= button_to "Delete Event", {:controller => :events,
+      :action => 'destroy', :id => @event.id }, :method => :delete, data: { confirm: "Are you sure?" }  %>
+<% end %>
+
+
 <p><%= "Attendees: " %></p>
 
 

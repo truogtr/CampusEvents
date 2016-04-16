@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+   attr_accessor :skip_val
+  #attr_accessor   :password, :password_confirmation
+  #attr_accessible :password, :password_confirmation
   # for encryption as in Exercise Files
 	has_secure_password
 
@@ -42,10 +45,16 @@ class User < ActiveRecord::Base
                     #:confirmation => true
 
   validates :password,     #:presence => true,
-                           :length => { :within => 4..15 }
+                           :length => { :within => 4..15 }, if: :skip_val
                            #:confirmation => true
+                            #on: :update, allow_blank: true,
+
+  #validates :password, length: {minimum: 4, maximum: 120}
 
   #validates :password_confirmation, :presence => true
+
+  #validates_confirmation_of :password, :on => :update
+  #validates_presence_of :password_confirmation, :on => :update
 
   # required validation for images
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
