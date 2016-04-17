@@ -1,9 +1,59 @@
 
+/* How to set background color for individual pages?
+ body {
+    background-color: lightblue;
+}
+
+body a:link{
+  color:blue;
+}
+
+body a:visited{
+  color:blue;
+}
+*/
+.user_edit h2 {
+    color: #4479BA;
+    font-size: 20px;
+}
+
+.user_edit label {
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+    width: 100px;
+}
+
+.user_edit input[type=text], .user_edit input[type="password"]{
+    border: 2px solid #4479BA;
+    border-radius: 4px;
+}
+
+
+.user_edit input[type=button], .user_edit input[type=submit],  .user_edit button {
+     background-color:transparent;
+     border: solid 1px #20538D;
+    border-radius: 2px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+     background: #4479BA;
+    color: #FFF;
+    padding: 5px 10px;
+}
+
+.user_edit input[type=button], .user_edit input[type=submit] {
+    color: white;
+    background: red;
+    border: solid 1px red;
+}
+
+
 
 #calendar {
     width: 1000px;
 
 }
+
+
 
 /* prevent calendar links from changing colors after they are clicked */
 #calendar a:link{

@@ -8,7 +8,14 @@ class EventsController < ApplicationController
 
   # get events ordered by start time for index page
   def index
-  	@events = Event.order(:start_time)
+  	#@events = Event.order(:start_time)
+
+    @events = Event.all.paginate(:page => params[:page])#.order => 'created_at DESC'
+    
+    Rails.logger.debug("@@@@#{params[:filtered].blank?}")
+
+    @filtered = Event.all.paginate(:page => params[:page])
+
     # TODO filter here (or with javascript on page?, no, better here, once
     # there's a lot of data) to only get the ones with end_time after right
     # now.
@@ -25,6 +32,10 @@ class EventsController < ApplicationController
     end
 
     @filtered = @search.results
+
+    @filtered = @filtered.paginate(:page => params[:page], :per_page => 5)
+
+    #maintain query
   
     respond_to do |format|
       format.js
@@ -38,30 +49,32 @@ class EventsController < ApplicationController
   def filter
 
     # grabs name of button to sort by category
-    cat = params[:cat]
+    @cat = params[:cat]
+
+    Rails.logger.debug("FILTERED RESET #{params[:cat]}")
 
 
-    @filtered = Event.order(:start_time)
+    @filtered = Event.order(:start_time).paginate(:page => params[:page])
     
 
-    if cat == "Social"
-      @filtered = Event.where(:category => "Social")
+    if @cat == "Social"
+      @filtered = Event.where(:category => "Social").paginate(:page => params[:page])
 
-    elsif cat == "Academic"
-      @filtered = Event.where(:category => "Academic")
-    elsif cat == "Sports and Recreation"
-      @filtered = Event.where(:category => "Sports and Recreation")
+    elsif @cat == "Academic"
+      @filtered = Event.where(:category => "Academic").paginate(:page => params[:page])
+    elsif @cat == "Sports and Recreation"
+      @filtered = Event.where(:category => "Sports and Recreation").paginate(:page => params[:page])
        #Rails.logger.debug("****ENTERED**** #{@filtered.size}")
-    elsif cat == "Arts"
-      @filtered = Event.where(:category => "Arts")
-    elsif cat == "Religion"
-      @filtered = Event.where(:category => "Religion")
+    elsif @cat == "Arts"
+      @filtered = Event.where(:category => "Arts").paginate(:page => params[:page])
+    elsif @cat == "Religion"
+      @filtered = Event.where(:category => "Religion").paginate(:page => params[:page])
     end
 
     # respond to: calls filter.js.erb
     respond_to do |format|
       format.js
-      format.html {  }
+      format.html { } #, :params => {:filtered => @filtered} }
       #format.json { render json: {  } }
     end
   end

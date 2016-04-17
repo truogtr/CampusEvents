@@ -39,7 +39,10 @@ gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 
 gem 'sunspot_rails', '~> 2.2.5'
+
 gem 'sunspot_solr'
+
+gem 'will_paginate', '~> 3.0.6'
 
 
 

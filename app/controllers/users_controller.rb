@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.skip_val = true
+    @user.do_val = true
     if @user.save
       flash[:notice] = 'Account created.'
       redirect_to user_path(@user)
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
      # find user
      @user = User.find(session[:user_id])
      # don't skil password validation (default). This sets the variable in the model
-     @user.skip_val = true
+     @user.do_val = true
      
      # get the subaction (whether info, pic, or password is being updated)
      subaction = params[:subaction]
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
      #conditional for updating based on subaction
      #skip password validation for info and pic
      if subaction == 'info'
-      @user.skip_val = false
+      @user.do_val = false
     
       if @user.update_attributes(user_info)
         redirect_to user_path(@user)
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
       end
 
     elsif subaction == 'picture'
-       @user.skip_val = false
+       @user.do_val = false
       if @user.update_attributes(user_pic)
          redirect_to user_path(@user)
       else 

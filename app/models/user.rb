@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-   attr_accessor :skip_val
+   attr_accessor :do_val
   #attr_accessor   :password, :password_confirmation
   #attr_accessible :password, :password_confirmation
   # for encryption as in Exercise Files
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
                     #:confirmation => true
 
   validates :password,     #:presence => true,
-                           :length => { :within => 4..15 }, if: :skip_val
+                           :length => { :within => 4..15 }, if: :do_val
                            #:confirmation => true
                             #on: :update, allow_blank: true,
 

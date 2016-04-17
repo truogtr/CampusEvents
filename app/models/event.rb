@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
     text :event_name 
   end
 
+  self.per_page = 5
+
 
 
 
