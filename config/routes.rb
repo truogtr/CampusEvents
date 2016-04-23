@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     collection do
       get :filter
       post :filter
+      get :search
+      post :search
     end
 
   end

@@ -2,12 +2,20 @@ class EventsController < ApplicationController
 
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
-	layout 'application'
+	layout 'events'
+  before_action :confirm_logged_in
 
 
   # get events ordered by start time for index page
   def index
-  	@events = Event.order(:start_time)
+  	#@events = Event.order(:start_time)
+
+    @events = Event.all.paginate(:page => params[:page])#.order => 'created_at DESC'
+    
+    Rails.logger.debug("@@@@#{params[:filtered].blank?}")
+
+    @filtered = Event.all.paginate(:page => params[:page])
+
     # TODO filter here (or with javascript on page?, no, better here, once
     # there's a lot of data) to only get the ones with end_time after right
     # now.
@@ -16,34 +24,57 @@ class EventsController < ApplicationController
 
   end
 
+   def search
+    
+    Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
+    @search = Event.search do
+      keywords(params[:query])
+    end
+
+    @filtered = @search.results
+
+    @filtered = @filtered.paginate(:page => params[:page], :per_page => 5)
+
+    #maintain query
+  
+    respond_to do |format|
+      format.js
+      format.html {}
+      #format.html { render :action => "index" }
+      #format.xml  { render :xml => @search }
+    end
+  end
+
   # filter events on index page
   def filter
 
     # grabs name of button to sort by category
-    cat = params[:cat]
+    @cat = params[:cat]
+
+    Rails.logger.debug("FILTERED RESET #{params[:cat]}")
 
 
-    @filtered = Event.order(:start_time)
-       # Rails.logger.debug("****CALLED**** #{params[:subaction]}")
+    @filtered = Event.order(:start_time).paginate(:page => params[:page])
+    
 
-    if cat == "Social"
-      @filtered = Event.where(:category => "Social")
+    if @cat == "Social"
+      @filtered = Event.where(:category => "Social").paginate(:page => params[:page])
 
-    elsif cat == "Academic"
-      @filtered = Event.where(:category => "Academic")
-    elsif cat == "Sports and Recreation"
-      @filtered = Event.where(:category => "Sports and Recreation")
+    elsif @cat == "Academic"
+      @filtered = Event.where(:category => "Academic").paginate(:page => params[:page])
+    elsif @cat == "Sports and Recreation"
+      @filtered = Event.where(:category => "Sports and Recreation").paginate(:page => params[:page])
        #Rails.logger.debug("****ENTERED**** #{@filtered.size}")
-    elsif cat == "Arts"
-      @filtered = Event.where(:category => "Arts")
-    elsif cat == "Religion"
-      @filtered = Event.where(:category => "Religion")
+    elsif @cat == "Arts"
+      @filtered = Event.where(:category => "Arts").paginate(:page => params[:page])
+    elsif @cat == "Religion"
+      @filtered = Event.where(:category => "Religion").paginate(:page => params[:page])
     end
 
     # respond to: calls filter.js.erb
     respond_to do |format|
       format.js
-      format.html {  }
+      format.html { } #, :params => {:filtered => @filtered} }
       #format.json { render json: {  } }
     end
   end
@@ -69,8 +100,12 @@ class EventsController < ApplicationController
     @creator = User.find(session[:user_id])
 
     @event.creator_id = @creator.id
-    @event.users << @creator
+    
+
+    # Rails.logger.debug("****FOUND**** #{@event.users.first.first_name}")
+
     if @event.save
+      @event.users << @creator
       flash[:notice] = 'Event created.'
       redirect_to event_path(@event.id)
     else
@@ -83,8 +118,25 @@ class EventsController < ApplicationController
 
   # todo: edit
   def edit
+    @event = Event.find(params[:id])
   end
 
+  def update
+
+    @event = Event.find(params[:id])
+    if @event.update_attributes(event_params)
+      redirect_to event_path(@event)
+    else
+      render('edit')
+    end
+
+  end
+
+  def destroy
+     @event = Event.find(params[:id])
+    @event.delete
+    redirect_to events_path
+  end
   # todo: delete
   def delete
   end

@@ -3,9 +3,9 @@
  <table class="fixed">
   <tr class="header">
   <!-- <th>&nbsp;</th> -->
-      <th>Event Name</th>
-      <th>Date and Time</th>
-      <th>Actions</th>
+        <th id = 'col1'>Event Name</th>
+        <th id = 'col2'>Date and Time</th>
+        <th id = 'col3'>Actions</th>
     </tr>
  
 
@@ -18,5 +18,7 @@
       <td class="actions"> <%= link_to("More Information", event_path(event.id), :class => 'action show') %> </td>
     </tr>
     <% end %>
+    <% Rails.logger.debug("IN VIEW #{params[:cat]}") %>
   
-  </div>
+  </table>
+  <%= will_paginate @filtered, :remote => true, :params => { :cat => params[:cat], :query => params[:query] } %>

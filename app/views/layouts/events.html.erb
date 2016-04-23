@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>CampusEvents | <%= @page_title || "Login" %></title>
+  <!-- TODO what does the below do? -->
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+  <%= javascript_include_tag    'application', media: 'all'%>
+
+
+</head>
+<body >
+   <div id="header">
+     <img src="/assets/Middlebury_Panthers_logo.png" alt="logo" style="width:175px;height:75px;">
+    </div>
+
+    <% if !flash[:notice].blank? %>
+        <div class="notice">
+            <%= flash[:notice] %>
+            <br><br>
+        </div>
+    <% end %>
+
+     <div>
+        <%= link_to("My Profile", user_path(session[:user_id])) %> |
+        <%= link_to("Create an Event", new_event_path) %> |
+        <%= link_to("View Events", events_path) %> |
+        <%= link_to "Sign out", :controller => 'access', :action => 'logout' %>
+    </div>
+
+    <%= yield %>
+
+</body>
+</html>

@@ -1,3 +1,29 @@
+=begin
+1. Styled events index
+
+2. Moved options bar out of application layout to prevent errors on access pages
+
+3. Completed password validation
+
+4. Added an image placeholder: 
+http://stackoverflow.com/questions/9646549/default-url-in-paperclip-broke-with-asset-pipeline-upgrade
+(the second answer)
+
+5. Implemented Filtering using gem sunspot
+after bundle install run:
+rake sunspot:solr:start
+before starting server 
+
+to stop run:
+rake sunspot:solr:stop
+
+
+if not working try running
+rake sunspot:reindex
+and restarting the server
+=end
+
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

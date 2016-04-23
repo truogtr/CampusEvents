@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315222449) do
+ActiveRecord::Schema.define(version: 20160416152504) do
 
   create_table "events", force: :cascade do |t|
     t.string   "event_name",        limit: 50
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20160315222449) do
     t.string   "last_name",           limit: 50
     t.string   "email",               limit: 255,   default: "", null: false
     t.string   "password_digest",     limit: 255
-    t.integer  "year",                limit: 4
     t.string   "major",               limit: 255
     t.text     "bio",                 limit: 65535
     t.datetime "created_at",                                     null: false
@@ -47,6 +46,12 @@ ActiveRecord::Schema.define(version: 20160315222449) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.string   "year",                limit: 255
+  end
+
+  create_table "users_events_joins", id: false, force: :cascade do |t|
+    t.integer "user_id",  limit: 4
+    t.integer "event_id", limit: 4
   end
 
 end

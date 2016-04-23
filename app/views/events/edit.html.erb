@@ -1,4 +1,18 @@
-<h1>Events#edit</h1>
-<p>Find me in app/views/events/edit.html.erb</p>
+<% @page_title = "Edit Event" %>
 
- <!-- Todo: edit -->
+<%#= link_to("<< Back to List", events_path, :class => 'back-link') %>
+ 
+ <!-- Create new event. Same as in Exercise Files. i.e. uses a partial -->
+<div class="events_edit">
+  <h2>Edit Event</h2>
+
+  <%= form_for(@event) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("Submit Changes") %>
+    </div>
+
+  <% end %>
+</div>
