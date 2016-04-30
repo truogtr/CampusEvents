@@ -1,5 +1,5 @@
 
- <!-- Partial that displays the filtered events -->    
+ <!-- Partial that displays the filtered events -->
  <table class="fixed">
   <tr class="header">
   <!-- <th>&nbsp;</th> -->
@@ -7,10 +7,10 @@
         <th id = 'col2'>Date and Time</th>
         <th id = 'col3'>Actions</th>
     </tr>
- 
+
 
   <div>
-    
+
  <% @filtered.each do |event| %>
     <tr class="<%= cycle('odd', 'even') %>">
       <td id = 'event-name'><%= event.event_name %></td>
@@ -19,6 +19,6 @@
     </tr>
     <% end %>
     <% Rails.logger.debug("IN VIEW #{params[:cat]}") %>
-  
+
   </table>
   <%= will_paginate @filtered, :remote => true, :params => { :cat => params[:cat], :query => params[:query] } %>

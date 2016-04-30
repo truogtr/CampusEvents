@@ -49,9 +49,4 @@ ActiveRecord::Schema.define(version: 20160416152504) do
     t.string   "year",                limit: 255
   end
 
-  create_table "users_events_joins", id: false, force: :cascade do |t|
-    t.integer "user_id",  limit: 4
-    t.integer "event_id", limit: 4
-  end
-
 end

@@ -3,7 +3,7 @@
 <head>
 
   <!-- TODO get default title here -->
-  <title>CampusEvents | <%= @page_title || "Default title" %></title>
+  <title>CampusEvents <%= " | #{@page_title}" if @page_title %></title>
   <!-- TODO what does the line below do? -->
 
   <%= stylesheet_link_tag    'application', media: 'all'%>
@@ -19,7 +19,7 @@
         </div>
     <% end %>
 
-   
+
 
     <%= yield %>
 

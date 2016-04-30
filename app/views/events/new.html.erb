@@ -1,13 +1,13 @@
 <% @page_title = "Create Event" %>
 
 <%= link_to("<< Back to List", events_path, :class => 'back-link') %>
- 
+
  <!-- Create new event. Same as in Exercise Files. i.e. uses a partial -->
 <div class="events new">
   <h2>Create Event</h2>
 
   <%= form_for(@event) do |f| %>
-
+    <!-- pass local vars to form using :locals hash -->
     <%= render(:partial => "form", :locals => {:f => f}) %>
 
     <div class="form-buttons">
