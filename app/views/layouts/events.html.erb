@@ -3,7 +3,6 @@
 <head>
 
   <title>CampusEvents <%= " | #{@page_title}" if @page_title %></title>
-  <!-- TODO what does the below do? -->
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag    'application', media: 'all'%>
 
@@ -11,7 +10,7 @@
 </head>
 <body >
    <div id="header">
-     <img src="/assets/Middlebury_Panthers_logo.png" alt="logo" style="width:175px;height:75px;">
+     <img align="middle" src="/assets/Middlebury_Panthers_logo.png" alt="logo" style="width:175px;height:75px;">
     </div>
 
     <% if !flash[:notice].blank? %>

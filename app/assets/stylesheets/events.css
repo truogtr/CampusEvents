@@ -42,8 +42,15 @@ a { text-decoration: none;
  }
 a:hover { text-decoration: underline; }
 
-#header { clear: both; text-align: left;
-  color: #F2DC87; }
+#header {
+    clear: both;
+    text-align: left;
+    color: #F2DC87;
+}
+
+#header img {
+    align: middle;
+}
 
 
 /*
