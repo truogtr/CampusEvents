@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
     :default_url => ':placeholder'
 
 
-	#EMAIL_REGEX = /\A[a-z0-9._%+-]+@middlebury.edu\Z/i
+  #EMAIL_REGEX = /\A[a-z0-9._%+-]+@middlebury.edu\Z/i
 
-	validates :first_name, :presence => true,
+  validates :first_name, :presence => true,
                          :length => { :maximum => 25 }
   validates :last_name, :presence => true,
                         :length => { :maximum => 50 }
@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
                     :uniqueness => true#,
                     #:confirmation => true
 
+  # TODO add password validation
+  # TODO add email password
   validates :password,     #:presence => true,
                            :length => { :within => 4..15 }, if: :do_val
                            #:confirmation => true

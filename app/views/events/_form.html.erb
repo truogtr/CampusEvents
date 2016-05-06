@@ -16,11 +16,16 @@
   </tr>
   <tr>
     <th><%= f.label(:start_time) %></th>
+    <!-- TODO validate that it's after right now -->
+    <!-- TODO see if field_with_errors is styled correctly
+         for this (currently only in scaffolds.css) -->
     <td><%= f.datetime_select(:start_time, ampm: true, minute_step: 15, start_year: Time.new.year,
                               end_year: Time.new.year+1, :order => [:month, :day, :year]) %></td>
   </tr>
    <tr>
     <th><%= f.label(:end_time) %></th>
+    <!-- TODO validate that it's after start_time, and
+         less than event max time if we want a max time -->
     <td><%= f.datetime_select(:end_time, ampm: true, minute_step: 15, start_year: Time.new.year,
                               end_year: Time.new.year+1, :order => [:month, :day, :year]) %></td>
   </tr>

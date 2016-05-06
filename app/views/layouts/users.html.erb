@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <title>CampusEvents | <%= @page_title || "Login" %></title>
+  <title>CampusEvents <%= " | #{@page_title}" if @page_title %></title>
   <!-- TODO what does the below do? -->
   <%= stylesheet_link_tag    'application', media: 'all'%>
   <%= javascript_include_tag    'application', media: 'all'%>

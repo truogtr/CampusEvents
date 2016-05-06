@@ -30,9 +30,9 @@
    <!-- Display Events table (same as Pages index display in Exercise Files)
         todo: We should probably render the _filtered_events partial here for DRY code -->
   <div class = 'events-list'>
-   
+
    <%= render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>
-    
+
 
     <% if false %>
     <table class="fixed">
@@ -42,8 +42,9 @@
         <th id = 'col2'>Date and Time</th>
         <th id = 'col3'>Details</th>
       </tr>
-      
+
       <% @events.each do |event| %>
+      <!-- cycle odd and even rows to color every other row differently -->
       <tr class="<%= cycle('odd', 'even') %>">
         <td id = 'event-name'><%= event.event_name %></td>
         <td id = 'event-date'><%= event.start_time.strftime("%B %d, '%y at %I:%M") %></td>
@@ -54,7 +55,7 @@
     <%= will_paginate @events %>
     <% end  %>
 
-    
+
   </div>
 
 </div>
