@@ -3,7 +3,17 @@
 Made with lots of help from this tutorial at Lynda.com, by Kevin Skoglund:
 http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
 
-TODO
+Requirements:
+
+* imagemagick
+
+To run locally, run these from the root of the app:
+
+* rake sunspot:solr:start
+* rails s
+
+
+TODO:
 
 * redirect pages or somehow show a good error when forms fail
 * confirm that user wants to leave the page if they've entered text w/o
