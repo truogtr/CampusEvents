@@ -1,13 +1,16 @@
 class User < ActiveRecord::Base
 
-   attr_accessor :do_val
+  attr_accessor :do_val
   #attr_accessor   :password, :password_confirmation
   #attr_accessible :password, :password_confirmation
   # for encryption as in Exercise Files
 	has_secure_password
 
   # Relate users to events
-  has_and_belongs_to_many :events
+  # has_and_belongs_to_many :events
+  has_many :event_commitments
+  has_many :events, :through => :event_commitments
+
   # TODO this represents what they're attending, but what about
   # what they're watching?
   # use "rich join" to see whether they have "joined" or "watched" the

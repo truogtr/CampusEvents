@@ -8,10 +8,10 @@ $(document).ready(function() {
 
   function HandleBackFunctionality(event)
 {
-	
+
   //$("#calendar").load("http://localhost:3000/users/3 #calendar*","" );
 	//console.log("refresh");
-  
+
 
 }
 
@@ -37,7 +37,7 @@ $(document).ready(function() {
 			}
 
 
-      element.find('.fc-title').append("<br/>" + mod_name); 
+      element.find('.fc-title').append("<br/>" + mod_name);
     },
 
     views: {
