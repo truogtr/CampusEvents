@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   	#@events = Event.order(:start_time)
 
     @events = Event.all.paginate(:page => params[:page])#.order => 'created_at DESC'
-    
+
     Rails.logger.debug("@@@@#{params[:filtered].blank?}")
 
     @filtered = Event.all.paginate(:page => params[:page])
@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   end
 
    def search
-    
+
     Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
     @search = Event.search do
       keywords(params[:query])
@@ -36,7 +36,7 @@ class EventsController < ApplicationController
     @filtered = @filtered.paginate(:page => params[:page], :per_page => 5)
 
     #maintain query
-  
+
     respond_to do |format|
       format.js
       format.html {}
@@ -55,7 +55,7 @@ class EventsController < ApplicationController
 
 
     @filtered = Event.order(:start_time).paginate(:page => params[:page])
-    
+
 
     if @cat == "Social"
       @filtered = Event.where(:category => "Social").paginate(:page => params[:page])
@@ -100,7 +100,7 @@ class EventsController < ApplicationController
     @creator = User.find(session[:user_id])
 
     @event.creator_id = @creator.id
-    
+
 
     # Rails.logger.debug("****FOUND**** #{@event.users.first.first_name}")
 
@@ -154,13 +154,17 @@ class EventsController < ApplicationController
     # add or remove user when button is clicked
     # based on whether or not the user is currently an attendee
     if @event.users.exclude?(@attendee)
-      @event.users << @attendee
-      @event.save
+			@event_commitment = EventCommitment.create(:user => @attendee, :event => @event, :description => "attend")
+      # @event.users << @attendee
+      # @event.save
+			# TODO is this right?
+			@event_commitment.save
+			Rails.logger.debug("!!!!! @event.users: #{@event.users.all}")
     else
       @event.users.delete(@attendee)
     end
 
-    @attendees = @event.users
+    @attendees = @event.users(true)  # use "true" to reload info from the db
 
     # respond to: calls attend.js.erb
     respond_to do |format|

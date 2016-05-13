@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
 
-  
+
   root 'access#login'
 
   resources :users do
     member do
       #get :calendar
       get :delete
+    end
+  end
+
+  resources :event_commitments do
+    member do
+      get :delete
+      post :attend
+      get :attend
+      delete :unattend
     end
   end
 
