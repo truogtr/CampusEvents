@@ -13,10 +13,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @events = @user.events
-    Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+    Rails.logger.debug("!!! #{@user}")
+    # @events = @user.events
     @event_commitments = @user.event_commitments
-    Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+    # Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+    if @user.id == session[:user_id]
+      @event_commitments = @user.event_commitments  # TODO check functionality and colors
+      Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+    else
+      @event_commitments = @user.event_commitments.where(:description => "attend")
+    end
   end
 
   def new
