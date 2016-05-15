@@ -20,18 +20,53 @@ window.onbeforeunload = function() {
 };
 
 
-	// change button text when attend button is clicked
+	/* change button text and class when attend button is clicked */
+	var attend_button = document.getElementById("attend");
+	console.log(attend_button);
+	var watch_button = document.getElementById("watch");
+	var neither_button = document.getElementById("neither");
+
 	$('#attend').on("click", function() {
-		var button_text = document.getElementById("attend");
-	  if (button_text.value=="Attend Event") button_text.value = "Unattend Event";
-	  else button_text.value = "Attend Event";
+	  if (attend_button.className!="selected_button") {
+			/* set selected button */
+			attend_button.className = "selected_button";
+			watch_button.className = "unselected_button";
+			neither_button.className = "unselected_button";
+			/* set text */
+			attend_button.value = "Attending";
+			watch_button.value = "Watch";
+			neither_button.value = "Neither";
 
+			console.log("attend_button.className: " + attend_button.className);
+		}
+	});
 
-	// TODO change here to have three buttons: attend, watch, neither;
-	// and change their color to blue with white text when selected.
+	$('#watch').on("click", function() {
+	  if (watch_button.className!="selected_button") {
+			/* set selected button */
+			attend_button.className = "unselected_button";
+			watch_button.className = "selected_button";
+			neither_button.className = "unselected_button";
+			/* set text */
+			attend_button.value = "Attend";
+			watch_button.value = "Watching";
+			neither_button.value = "Neither";
 
- });
+			console.log("watch_button.className: " + watch_button.className);
+		}
+	});
 
-
+	$('#neither').on("click", function() {
+	  if (neither_button.className!="selected_button") {
+			/* set selected button */
+			attend_button.className = "unselected_button";
+			watch_button.className = "unselected_button";
+			neither_button.className = "selected_button";
+			/* set text */
+			attend_button.value = "Attend";
+			watch_button.value = "Watching";
+			neither_button.value = "Neither";
+		}
+	});
 
 });

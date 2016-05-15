@@ -36,10 +36,12 @@
 </span>
 
  <!-- Handle button text. Attend if user is currently attending, Unattend otherwise -->
-<% button_text = "Attend Event" %>
-<% if @event.users.include?(@user) %>
-<% button_text = "Unattend Event" %>
-<% end %>
+<% button_text = Hash.new() %>
+<% button_class = Hash.new() %>
+<% set_buttons(button_text, button_class) %>
 
- <!-- Handle adding a user to events with javascript. Calls attend action -->
-<%= button_to button_text, attend_event_path(@event), :remote => true,  :id => "attend" %>
+
+ <!-- Handle adding a user to events with javascript. Calls attend, watch, or neither action -->
+<%= button_to button_text["attend"], attend_event_path(@event), :remote => true,  :id => "attend", :class => button_class["attend"] %>
+<%= button_to button_text["watch"], watch_event_path(@event), :remote => true,  :id => "watch", :class => button_class["watch"] %>
+<%= button_to button_text["neither"], neither_event_path(@event), :remote => true,  :id => "neither", :class => button_class["neither"] %>

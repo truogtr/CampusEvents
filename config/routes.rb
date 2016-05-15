@@ -10,20 +10,24 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :event_commitments do
-    member do
-      get :delete
-      post :attend
-      get :attend
-      delete :unattend
-    end
-  end
+  # resources :event_commitments do
+  #   member do
+  #     get :delete
+  #     post :attend
+  #     get :attend
+  #     delete :unattend
+  #   end
+  # end
 
   resources :events do
     member do
       get :delete
+      # get :attend
       post :attend
-      get :attend
+      # get :watch
+      post :watch
+      # get :neither
+      post :neither
       delete :unattend
     end
 

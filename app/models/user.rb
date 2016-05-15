@@ -11,15 +11,6 @@ class User < ActiveRecord::Base
   has_many :event_commitments
   has_many :events, :through => :event_commitments
 
-  # TODO this represents what they're attending, but what about
-  # what they're watching?
-  # use "rich join" to see whether they have "joined" or "watched" the
-  # event. See:
-  # http://www.lynda.com/Ruby-Rails-tutorials/Many-many-associations-Rich/139989/159108-4.html?autoplay=true
-  # And create a model for the "event_watching/attendees/attendance" or s'th like that
-  # Now it will also have a primary key because it is its own table.
-  # "event relationships" ?
-
   #attr_accessor :password_confirmation
 
   # For images

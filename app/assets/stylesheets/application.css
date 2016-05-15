@@ -27,3 +27,11 @@
  color: navy;
  font-weight: bold;
 }
+
+.unselected_button {
+  background-color: white;
+}
+
+.selected_button {
+  background-color: blue;
+}
