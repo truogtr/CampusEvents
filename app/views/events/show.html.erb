@@ -42,6 +42,7 @@
 
 
  <!-- Handle adding a user to events with javascript. Calls attend, watch, or neither action -->
+ <!-- TODO put these on one line; make their width all the same -->
 <%= button_to button_text["attend"], attend_event_path(@event), :remote => true,  :id => "attend", :class => button_class["attend"] %>
 <%= button_to button_text["watch"], watch_event_path(@event), :remote => true,  :id => "watch", :class => button_class["watch"] %>
 <%= button_to button_text["neither"], neither_event_path(@event), :remote => true,  :id => "neither", :class => button_class["neither"] %>

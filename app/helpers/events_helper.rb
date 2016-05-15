@@ -1,11 +1,11 @@
 module EventsHelper
 
+	# TODO are filter and attend being used?
+
 	def filter
 		puts "called"
 		 Rails.logger.debug("****GOT HERE****")
 	end
-
-	# TODO are these being used?
 
 	def attend
 			puts "called"

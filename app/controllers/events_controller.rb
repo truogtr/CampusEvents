@@ -82,12 +82,8 @@ class EventsController < ApplicationController
 
   # display an event
   def show
-    #Rails.cache.clear
-     #Rails.logger.debug("!! CACHE CLEARED")
-
   	 @event = Event.find(params[:id])
   	 @user = User.find(session[:user_id])
-
   end
 
   # instantiate a new event for create
@@ -101,9 +97,6 @@ class EventsController < ApplicationController
     @creator = User.find(session[:user_id])
 
     @event.creator_id = @creator.id
-
-
-    # Rails.logger.debug("****FOUND**** #{@event.users.first.first_name}")
 
     if @event.save
       @event.users << @creator
@@ -138,7 +131,8 @@ class EventsController < ApplicationController
     @event.delete
     redirect_to events_path
   end
-  # todo: delete
+
+  # TODO: delete
   def delete
   end
 
@@ -152,7 +146,6 @@ class EventsController < ApplicationController
 
 		# create a new event_commitment, or change @event_commitment's description to "attend"
 		if @event_commitment == nil
-			# note: create autosaves to db
 			@event_commitment = EventCommitment.create(:user => @attendee, :event => @event, :description => "attend")
 		elsif @event_commitment.description != "attend"
 			# use update_attributes b/c saves automatically
@@ -177,7 +170,6 @@ class EventsController < ApplicationController
 
 		# create a new event_commitment, or change @event_commitment's description to "watch"
 		if @event_commitment == nil
-			# note: create autosaves to db
 			@event_commitment = EventCommitment.create(:user => @attendee, :event => @event, :description => "watch")
 		elsif @event_commitment.description != "watch"
 			# use update_attributes b/c saves automatically

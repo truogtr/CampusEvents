@@ -29,9 +29,13 @@
 }
 
 .unselected_button {
-  background-color: white;
+  /*background-color: white;*/
+  background: none;
+  color: black;
 }
 
 .selected_button {
-  background-color: blue;
+  /*background-color: blue;*/
+  background: #4479BA;
+  color: white;
 }
