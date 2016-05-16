@@ -11,36 +11,76 @@ table.fixed {table-layout:fixed; width:700px;}
 #col3 {width: 140px;}
 
 
-.filter-btns input {
+.buttons_table input {
     background-color:transparent;
-     border: solid 1px #20538D;
+    border: solid 1px #20538D;
     border-radius: 4px;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-     background: #4479BA;
+    font-size: 12px;
+    background: #4479BA;
     color: #FFF;
-    padding: 10px 15px;
+    padding: .8em 1em;
 }
 
-.filter-btns input:hover, .filter-btns input:focus {
+/* inherit all from .buttons_table input except the properties
+ * specified here */
+.buttons_table input.unselected_button {
+    text-shadow: none;
+    background: none;
+    color: #4479BA;
+}
+
+.buttons_table input:hover, .buttons_table input:focus {
     background: #356094;
     border: solid 1px #2A4E77;
     text-decoration: none;
 }
 
-.odd, .odd a { background: #4479BA;
-			 color:white; }
+/* inherit all from .buttons_table input:hover and input:focus except the
+ * properties specified here */
+.buttons_table input.unselected_button:hover,
+.buttons_table input.unselected_button:focus {
+    color: #FFF;
+}
 
-.even, .even a { background: none;
-				color: black; }
+/* keep uniform width for the "radio" selection buttons */
+.buttons_table input.unselected_button,
+.buttons_table input.selected_button {
+    width: 90px;
+}
 
-a { text-decoration: none;
-    font-weight: bold;
+.buttons_table input.user_options{
+    padding: .2em .4em;
+}
 
+.odd, .odd a {
+    background: #4479BA;
+    color:white;
+}
 
+.even, .even a {
+    background: none;
+	color: black;
+}
 
+.attendees_list_div{
+    /*min-height: 3em;*/
+}
 
- }
-a:hover { text-decoration: underline; }
+.event_info_table {
+    /*border: solid 4px #20538D;*/
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    /*width: 100%;*/
+}
+
+#attendees_list {
+    /*min-height: 2em;*/
+    /*padding-bottom: .5em;*/
+    /*margin-left: .5em;*/
+}
+
 
 #header {
     clear: both;
@@ -68,21 +108,15 @@ a:hover { text-decoration: underline; }
 
 /*
 
-.filter-btns td {
+.buttons_table td {
 	{
     padding: 10px 15px;
     background: #4479BA;
     color: #FFF;
 }
 */
-#attendees-list {
-	/*display: none;*/
-}
-
-
 
 /*table.fixed .header {display: table-header-group;}*/
-
 
 /*
 table.fixed td {overflow:hidden;}

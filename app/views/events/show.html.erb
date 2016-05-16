@@ -1,39 +1,65 @@
 
 <%= link_to("<< Back to List", events_path, :class => 'back-link') %>
 
-<h1>Event Details</h1>
- <% Rails.cache.clear %>
- <% #cache @user_object do %>
+<h1><%= "#{@event.event_name}" %></h1>
+<!-- TODO what is this cache clear doing? -->
+<% Rails.cache.clear %>
+
 <% creator = User.find(@event.creator_id) %>
-
-
- <!-- Display an Event's information. Nothing to complicated here -->
-<p class><%= "Event Name: #{@event.event_name}" %></p>
-<p><%= @event.start_time.strftime("%B %d, '%y at %I:%M") %></p>
-<p><%= @event.end_time.strftime("%B %d, '%y at %I:%M") %></p>
-<p><%= "Event Category: #{@event.category}" %></p>
-<p><%= "Event Description: #{@event.event_description}" %></p>
-<p><%= "Creator: "%><%= link_to "#{creator.first_name} #{creator.last_name}", creator %></p>
-
 <% if @user.id == creator.id %>
-	<%= link_to "Edit Event", edit_event_path(@event) %></br>
-
-      <%= button_to "Delete Event", {:controller => :events,
-      :action => 'destroy', :id => @event.id }, :method => :delete, data: { confirm: "Are you sure?" }  %>
+    <table class = 'buttons_table'>
+      <tr>
+        <td>
+            <%= button_to "Edit Event", edit_event_path(@event),
+                :class => "user_options"%>
+        </td>
+        <td>
+            <%= button_to "Delete Event",
+            {:controller => :events, :action => 'destroy', :id => @event.id },
+            :method => :delete, data: { confirm: "Are you sure?" },
+            :class => "user_options" %>
+        </td>
+      </tr>
+    </table>
 <% end %>
 
+ <!-- Display an Event's information -->
+<table class="event_info_table">
+    <tr>
+        <th>When:</th>
+        <td>
+            <% if @event.start_time.to_date == @event.end_time.to_date %>
+                <%= @event.start_time.strftime("%B %d, %Y: %I:%M%p") %>
+                &mdash; <%= @event.end_time.strftime("%I:%M%p") %>
+            <% else %>
+                <%= @event.start_time.strftime("%B %d, %Y: %I:%M%p") %>
+                &mdash; <%= @event.end_time.strftime("%B %d, %Y: %I:%M%p") %>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <th>Category:</th>
+        <td><%= "#{@event.category}" %></td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td><%= "#{@event.event_description}" %></td>
+    </tr>
+    <tr>
+        <th>Creator:</th>
+        <td><%= link_to "#{creator.first_name} #{creator.last_name}", creator %></td>
+    </tr>
+    <tr>
+        <!-- Display each attendee of the event-->
+        <th>Attendees:</th>
+        <td id="attendees_list">
+            <!-- TODO change this  -->
+            <% event_commitments = @event.event_commitments %>
+            <%= render(:partial => 'attendees_list', :locals => { :event_commitments => event_commitments }) %>
+        </td>
+    </tr>
+</table>
 
-<p><%= "Attendees: " %></p>
-
-
-<span id = 'attendees-list'>
-
- <!-- Display each attendee of the event-->
-<% attendees = @event.users %>
-
-	<%= render(:partial => 'attendees_list', :locals => { :attendees => attendees }) %>
-
-</span>
 
  <!-- Handle button text. Attend if user is currently attending, Unattend otherwise -->
 <% button_text = Hash.new() %>
@@ -43,6 +69,16 @@
 
  <!-- Handle adding a user to events with javascript. Calls attend, watch, or neither action -->
  <!-- TODO put these on one line; make their width all the same -->
-<%= button_to button_text["attend"], attend_event_path(@event), :remote => true,  :id => "attend", :class => button_class["attend"] %>
-<%= button_to button_text["watch"], watch_event_path(@event), :remote => true,  :id => "watch", :class => button_class["watch"] %>
-<%= button_to button_text["neither"], neither_event_path(@event), :remote => true,  :id => "neither", :class => button_class["neither"] %>
+<table class = 'buttons_table'>
+  <tr>
+    <td>
+        <%= button_to button_text["attend"], attend_event_path(@event), :remote => true,  :id => "attend", :class => button_class["attend"] %>
+    </td>
+    <td>
+        <%= button_to button_text["watch"], watch_event_path(@event), :remote => true,  :id => "watch", :class => button_class["watch"] %>
+    </td>
+    <td>
+        <%= button_to button_text["neither"], neither_event_path(@event), :remote => true,  :id => "neither", :class => button_class["neither"] %>
+    </td>
+  </tr>
+</table>

@@ -64,7 +64,7 @@ window.onbeforeunload = function() {
 			neither_button.className = "selected_button";
 			/* set text */
 			attend_button.value = "Attend";
-			watch_button.value = "Watching";
+			watch_button.value = "Watch";
 			neither_button.value = "Neither";
 		}
 	});

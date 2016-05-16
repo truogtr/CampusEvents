@@ -7,8 +7,8 @@ $(document).ready(function() {
 // Javascript that replaces the attendees list with the new list of attendees
 // This file is automatically called when respond_to block in attend action is executed
 // ATattendees is the variable passed from the attend action in the controller
-// the partial is rendered in the attendees-list html tag
-$('#attendees-list').html("<%= j render(:partial => 'attendees_list', :locals => { :attendees => @attendees }) %>");
+// the partial is rendered in the attendees_list html tag
+$('#attendees_list').html("<%= j render(:partial => 'attendees_list', :locals => { :event_commitments => @event_commitments }) %>");
 //$("#calendar").fullCalendar( 'refetchEvents' );
 //$("#calendar").fullCalendar( 'refresh' );
 //console.log(location + "LOCATION")

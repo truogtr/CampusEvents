@@ -13,10 +13,16 @@
  *= require_tree .
  *= require_self
  *= require fullcalendar
-
-
  */
 
+$font-stack: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+/* $font-stack: "Lucida Sans Unicode", "Lucida Grande", sans-serif; */
+/* Using Monochromatic Color scheme here: http://www.colorhexa.com/356094 */
+$blue-light: #5486c2;
+$blue-reg: #4479ba;
+$blue-dark: #356094;
+$blue-darker: #2e5481;
+$blue-darkest: #213b5c;
 
 .profile_header {
  text-align: left;
@@ -28,14 +34,36 @@
  font-weight: bold;
 }
 
-.unselected_button {
-  /*background-color: white;*/
-  background: none;
-  color: black;
+body {
+    font-family: $font-stack;
+    margin-left: 3em;
+    margin-right: 3em;
 }
 
-.selected_button {
-  /*background-color: blue;*/
-  background: #4479BA;
-  color: white;
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: $blue-light;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: $blue-darker;
+}
+
+h1 {
+    margin: 0;
+}
+
+h3 {
+    margin: .4em;
+}
+
+table th {
+    text-align: right;
+    vertical-align: top;
+    padding-right: 1em;
 }

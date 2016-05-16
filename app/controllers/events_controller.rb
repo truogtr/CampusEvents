@@ -99,7 +99,7 @@ class EventsController < ApplicationController
     @event.creator_id = @creator.id
 
     if @event.save
-      @event.users << @creator
+			EventCommitment.create(:user => @creator, :event => @event, :description => "attend")
       flash[:notice] = 'Event created.'
       redirect_to event_path(@event.id)
     else
@@ -152,7 +152,7 @@ class EventsController < ApplicationController
 			@event_commitment.update_attributes(:description => "attend")
     end
 
-    @attendees = @event.users(true)  # use "true" to reload info from the db
+    @event_commitments = @event.event_commitments(true)  # use "true" to reload info from the db
 
     # respond to: calls attend.js.erb
     respond_to do |format|
@@ -176,7 +176,7 @@ class EventsController < ApplicationController
 			@event_commitment.update_attributes(:description => "watch")
     end
 
-    @attendees = @event.users(true)  # use "true" to reload info from the db
+    @event_commitments = @event.event_commitments(true)  # use "true" to reload info from the db
 
     # respond to: calls watch.js.erb
     respond_to do |format|
@@ -197,7 +197,7 @@ class EventsController < ApplicationController
 			@event.users.delete(@attendee)
     end
 
-    @attendees = @event.users(true)  # use "true" to reload info from the db
+    @event_commitments = @event.event_commitments(true)  # use "true" to reload info from the db
 
     # respond to: calls neither.js.erb
     respond_to do |format|
