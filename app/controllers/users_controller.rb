@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
 	layout :resolve_layout
@@ -13,7 +13,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @events = @user.events
+    Rails.logger.debug("!!! #{@user}")
+    # @events = @user.events
+    @event_commitments = @user.event_commitments
+    # Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+    if @user.id == session[:user_id]
+      @event_commitments = @user.event_commitments  # TODO check functionality and colors
+      Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+    else
+      @event_commitments = @user.event_commitments.where(:description => "attend")
+    end
   end
 
   def new
@@ -22,7 +31,7 @@ class UsersController < ApplicationController
 
 
     #respond_to do |format|
-     # format.html { render :layout => 'access' } 
+     # format.html { render :layout => 'access' }
     #end
   end
 
@@ -49,7 +58,7 @@ class UsersController < ApplicationController
      @user = User.find(session[:user_id])
      # don't skil password validation (default). This sets the variable in the model
      @user.do_val = true
-     
+
      # get the subaction (whether info, pic, or password is being updated)
      subaction = params[:subaction]
 
@@ -57,10 +66,10 @@ class UsersController < ApplicationController
      #skip password validation for info and pic
      if subaction == 'info'
       @user.do_val = false
-    
+
       if @user.update_attributes(user_info)
         redirect_to user_path(@user)
-      else 
+      else
         render('edit')
       end
 
@@ -68,17 +77,17 @@ class UsersController < ApplicationController
        @user.do_val = false
       if @user.update_attributes(user_pic)
          redirect_to user_path(@user)
-      else 
+      else
         render('edit')
       end
     elsif subaction == 'pass'
       if @user.update_attributes(user_pass)
          redirect_to user_path(@user)
-      else 
+      else
         render('edit')
       end
     end
-     
+
   end
 
   def delete
@@ -93,7 +102,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  private 
+  private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name,
@@ -126,20 +135,20 @@ end
 
 
 =begin
-@user.update_attribute(:first_name, params[:user][:first_name]) and 
+@user.update_attribute(:first_name, params[:user][:first_name]) and
         @user.update_attribute(:last_name, params[:user][:last_name]) and
-        @user.update_attribute(:major, params[:user][:major]) and 
-        @user.update_attribute(:year, params[:user][:year]) 
+        @user.update_attribute(:major, params[:user][:major]) and
+        @user.update_attribute(:year, params[:user][:year])
 
 
               # user_params2.reject{|k,v| v.blank?}))
         #,
        #:last_name => params[:user][:last_name], :major => params[:user][:major],
-        #:year => params[:user][:year] ) 
+        #:year => params[:user][:year] )
        # params.require(:user).permit(:first_name, :last_name, :year, :major) )
 
          #params[:user] = nil if params[:user].blank?
-       
+
       #params[:user][:password]=  nil;
       # Rails.logger.debug "!!! #{params[:user][:password].blank?} !!!"
        #params[:user].delete(:password)
@@ -157,5 +166,3 @@ end
       Rails.logger.info(@user.errors.inspect)
     end
 =end
-
-

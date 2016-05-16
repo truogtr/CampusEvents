@@ -1,7 +1,9 @@
 
  <!-- Partial that displays the updated list of attendees -->
-<% attendees.each do |a| %>
-     <% attendee_name = "#{a.first_name} #{a.last_name}"%>
-     <% attendee_name += "," unless a == attendees.last %>
-     <%= link_to attendee_name, a %>
+<% event_commitments = event_commitments.where(:description => "attend") %>
+<% event_commitments.each do |com| %>
+    <% attendee = User.find(com.user_id) %>
+    <% attendee_name = "#{attendee.first_name} #{attendee.last_name}"%>
+    <% attendee_name += "," unless com == event_commitments.last %>
+    <%= link_to attendee_name, attendee %>
 <% end %>

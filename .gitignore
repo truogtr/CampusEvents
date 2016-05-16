@@ -13,3 +13,11 @@
 /tmp
 
 /config/local_env.yml
+
+# solr things -- NOTE: change this if needed
+solr/data
+solr/test
+solr/development
+solr/default/data
+/log/*.log.lck
+solr/pids
