@@ -11,10 +11,11 @@ class EventsController < ApplicationController
   	#@events = Event.order(:start_time)
 
     @events = Event.all.paginate(:page => params[:page])#.order => 'created_at DESC'
-    
+
     Rails.logger.debug("@@@@#{params[:filtered].blank?}")
 
     @filtered = Event.all.paginate(:page => params[:page])
+		# TODO Event.where(date and time is after today)
 
     # TODO filter here (or with javascript on page?, no, better here, once
     # there's a lot of data) to only get the ones with end_time after right
@@ -25,7 +26,7 @@ class EventsController < ApplicationController
   end
 
    def search
-    
+
     Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
     @search = Event.search do
       keywords(params[:query])
@@ -36,7 +37,7 @@ class EventsController < ApplicationController
     @filtered = @filtered.paginate(:page => params[:page], :per_page => 5)
 
     #maintain query
-  
+
     respond_to do |format|
       format.js
       format.html {}
@@ -55,7 +56,7 @@ class EventsController < ApplicationController
 
 
     @filtered = Event.order(:start_time).paginate(:page => params[:page])
-    
+
 
     if @cat == "Social"
       @filtered = Event.where(:category => "Social").paginate(:page => params[:page])
@@ -81,12 +82,8 @@ class EventsController < ApplicationController
 
   # display an event
   def show
-    #Rails.cache.clear
-     #Rails.logger.debug("!! CACHE CLEARED")
-
   	 @event = Event.find(params[:id])
   	 @user = User.find(session[:user_id])
-
   end
 
   # instantiate a new event for create
@@ -100,12 +97,9 @@ class EventsController < ApplicationController
     @creator = User.find(session[:user_id])
 
     @event.creator_id = @creator.id
-    
-
-    # Rails.logger.debug("****FOUND**** #{@event.users.first.first_name}")
 
     if @event.save
-      @event.users << @creator
+			EventCommitment.create(:user => @creator, :event => @event, :description => "attend")
       flash[:notice] = 'Event created.'
       redirect_to event_path(@event.id)
     else
@@ -137,30 +131,28 @@ class EventsController < ApplicationController
     @event.delete
     redirect_to events_path
   end
-  # todo: delete
+
+  # TODO: delete
   def delete
   end
 
   # handle 'attend' button click
   def attend
-
-    #Rails.cache.clear
-    #Rails.logger.debug("!!!!cache clear")
-
-
   	@event = Event.find(params[:id])
   	@attendee = User.find(session[:user_id])
 
-    # add or remove user when button is clicked
-    # based on whether or not the user is currently an attendee
-    if @event.users.exclude?(@attendee)
-      @event.users << @attendee
-      @event.save
-    else
-      @event.users.delete(@attendee)
+		# get @attendee's event_commitment with this event, if any
+		@event_commitment = @attendee.event_commitments.where(:event_id => @event.id).first
+
+		# create a new event_commitment, or change @event_commitment's description to "attend"
+		if @event_commitment == nil
+			@event_commitment = EventCommitment.create(:user => @attendee, :event => @event, :description => "attend")
+		elsif @event_commitment.description != "attend"
+			# use update_attributes b/c saves automatically
+			@event_commitment.update_attributes(:description => "attend")
     end
 
-    @attendees = @event.users
+    @event_commitments = @event.event_commitments(true)  # use "true" to reload info from the db
 
     # respond to: calls attend.js.erb
     respond_to do |format|
@@ -169,13 +161,57 @@ class EventsController < ApplicationController
     end
   end
 
+	def watch
+		@event = Event.find(params[:id])
+  	@attendee = User.find(session[:user_id])
+
+		# get @attendee's event_commitment with this event, if any
+		@event_commitment = @attendee.event_commitments.where(:event_id => @event.id).first
+
+		# create a new event_commitment, or change @event_commitment's description to "watch"
+		if @event_commitment == nil
+			@event_commitment = EventCommitment.create(:user => @attendee, :event => @event, :description => "watch")
+		elsif @event_commitment.description != "watch"
+			# use update_attributes b/c saves automatically
+			@event_commitment.update_attributes(:description => "watch")
+    end
+
+    @event_commitments = @event.event_commitments(true)  # use "true" to reload info from the db
+
+    # respond to: calls watch.js.erb
+    respond_to do |format|
+      format.js
+      format.html { redirect_to(@event) }
+    end
+	end
+
+	def neither
+		@event = Event.find(params[:id])
+  	@attendee = User.find(session[:user_id])
+
+		# get @attendee's event_commitment with this event, if any
+		@event_commitment = @attendee.event_commitments.where(:event_id => @event.id).first
+
+		# delete @event_commitment if there is one
+		if @event_commitment != nil
+			@event.users.delete(@attendee)
+    end
+
+    @event_commitments = @event.event_commitments(true)  # use "true" to reload info from the db
+
+    # respond to: calls neither.js.erb
+    respond_to do |format|
+      format.js
+      format.html { redirect_to(@event) }
+    end
+	end
 
   private
 
   # for strong params for a new event
   def event_params
     # same as using "params[:event]", except that it:
-    # - raises and error if :event is not present
+    # - raises an error if :event is not present
     # - allows listed attributes to be mass assigned
     params.require(:event).permit(:event_name, :location, :event_description,
       :start_time, :end_time, :category)

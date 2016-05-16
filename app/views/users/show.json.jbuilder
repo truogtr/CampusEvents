@@ -1,8 +1,10 @@
-json.array!(@events) do |event|
-	#Rails.logger.debug("IN JSON LAND")
-	json.extract! event, :id, :event_name, :event_description
+# help here: https://richonrails.com/articles/getting-started-with-jbuilder
+
+json.array!(@event_commitments) do |commitment|
+	json.description commitment.description
+	event = commitment.event
+	json.extract! event, :id, :event_name, :event_description  # id refers to event_id
 	json.start event.start_time
 	json.end event.end_time
-  #json.extract! event, :id, :event_name, :event_description, :created_at, :updated_at
   json.url event_url(event, format: :html)
 end
