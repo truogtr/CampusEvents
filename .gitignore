@@ -13,3 +13,5 @@
 /tmp
 
 /config/local_env.yml
+solr/default/data/index
+solr/default/data/tlog
