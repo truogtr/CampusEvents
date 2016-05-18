@@ -52,12 +52,12 @@ table.fixed {table-layout:fixed; width:700px;}
     padding: .2em .4em;
 }
 
-.odd, .odd a {
+.odd, .odd a, .odd a.action.show {
     background: #4479BA;
     color:white;
 }
 
-.even, .even a {
+.even, .even a, .even a.action.show {
     background: none;
 	color: black;
 }

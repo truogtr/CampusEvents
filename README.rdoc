@@ -9,10 +9,12 @@ Requirements:
 
 To run locally, run these from the root of the app:
 
+(NOTE: Any time ```rake``` is used, you may need ```bin/rake```)
+
 * rake db:migrate (only needed if your database isn't up to date)
-  * or: bin/rake db:migrate
 * rake sunspot:solr:start
-  * or: bin/rake sunspot:solr:start
+  * rake sunspot:reindex
+    * do this any time after changing a "searchable" definition for a model
 * rails s
 
 

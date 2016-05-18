@@ -5,7 +5,9 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :event_commitments
 
   searchable do
-    text :event_name
+    text :event_name, :default_boost => 2
+    text :event_description
+    time :end_time
   end
 
   self.per_page = 5

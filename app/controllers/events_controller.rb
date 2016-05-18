@@ -7,37 +7,27 @@ class EventsController < ApplicationController
 
   # get events ordered by start time for index page
   def index
-  	#@events = Event.order(:start_time)
-
-    @events = Event.all.paginate(:page => params[:page])#.order => 'created_at DESC'
-
-    Rails.logger.debug("@@@@#{params[:filtered].blank?}")
-
-    @filtered = Event.all.paginate(:page => params[:page])
-		# TODO Event.where(date and time is after today)
-
-    # TODO filter here (or with javascript on page?, no, better here, once
-    # there's a lot of data) to only get the ones with end_time after right
-    # now.
-
-     #@events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])
-
+		# simply call filter with category "All"
+		@cat = "All"
+		filter
   end
 
-   def search
+  def search
+		@time_range_to_search = Time.zone.now..1000.days.from_now
 
-    Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
+    # Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
     @search = Event.search do
+			# with(:end_time, @time_range_to_search)
+			# TODO the above "with" does not get events in the future, but the below
+			# does. The below works for now, but the above would be more consistent
+			# with the way our filter() action works.
+			with(:end_time).greater_than(Time.zone.now)
       keywords(params[:query])
     end
 
-
-    @filtered = @search.results #.where(:end_time > Time.now)
-
-    @filtered = @filtered.paginate(:page => params[:page], :per_page => 5)
+    @filtered = @search.results.paginate(:page => params[:page], :per_page => 5)
 
     #maintain query
-
     respond_to do |format|
       format.js
       format.html {}
@@ -48,59 +38,26 @@ class EventsController < ApplicationController
 
   # filter events on index page
   def filter
-
-		# Note: use Time.zone instead of just Time in order to get a TimeWithZone
-		# object for comparison with :end_time.
-		# Also, put the query for where() into a hash!
-    # @filtered = Event.where({end_time: Time.zone.now..10.days.from_now}).order(start_time: :asc).paginate(:page => params[:page])  #  # created_at: 5.days.ago..Time.now
-
+		@time_range_to_search = Time.zone.now..1000.days.from_now
 
     # grabs name of button to sort by category
     @cat = params[:cat]
 		@categories = ["Social", "Academic", "Sports and Recreation", "Arts", "Religion"]
 
-		Rails.logger.debug("!!!! cat: #{@cat}")
 		if @categories.include? @cat  # @cat is a recognized category
-			Rails.logger.debug("!!!! cat again: #{@cat}")
-
-			# new_list = Event.where({end_time: Time.zone.now..10.days.from_now})
-			# 							  .where(:category => @cat)
-			# if !(new_list.empty?)
-			# 	Rails.logger.debug("!!!! cat again again: #{new_list.first}")
-			# 	@filtered = new_list.order(start_time: :asc)
-			# 	                  .paginate(:page => params[:page]) unless params[:technols].nil?
-			# else
-			# 	@filtered = []
-			# end
-			@filtered = Event.where({end_time: Time.zone.now..10.days.from_now,
+			# Note: use Time.zone instead of just Time in order to get a TimeWithZone
+			# object for comparison with :end_time.
+			@filtered = Event.where({end_time: @time_range_to_search,
 															 category: @cat})
 											 .order(start_time: :asc)
 											 .paginate(:page => params[:page])
 		else  # @cat is "All" or an unrecognized category
-			@filtered = Event.where({end_time: Time.zone.now..10.days.from_now})
+			@filtered = Event.where({end_time: @time_range_to_search})
 											 .order(start_time: :asc)
 											 .paginate(:page => params[:page])
 		end
 
-    Rails.logger.debug("FILTERED RESET #{params[:cat]}")
-
-
-		# Rails.logger.debug(@filtered.first.end_time)
-
-
-    # if @cat ==
-		#
-		#
-    # elsif @cat ==
-    #   @filtered = Event.where({end_time: Time.zone.now..10.days.from_now}).order(start_time: :asc).where(:category => "Academic").paginate(:page => params[:page])
-    # elsif @cat ==
-    #   @filtered = Event.where({end_time: Time.zone.now..10.days.from_now}).order(start_time: :asc).where(:category => "Sports and Recreation").paginate(:page => params[:page])
-    #    #Rails.logger.debug("****ENTERED**** #{@filtered.size}")
-    # elsif @cat ==
-    #   @filtered = Event.where({end_time: Time.zone.now..10.days.from_now}).order(start_time: :asc).where(:category => "Arts").paginate(:page => params[:page])
-    # elsif @cat ==
-    #   @filtered = Event.where({end_time: Time.zone.now..10.days.from_now}).order(start_time: :asc).where(:category => "Religion").paginate(:page => params[:page])
-    # end
+    # Rails.logger.debug("FILTERED RESET #{params[:cat]}")
 
     # respond to: calls filter.js.erb
     respond_to do |format|
@@ -191,6 +148,7 @@ class EventsController < ApplicationController
     end
   end
 
+	# handle 'watch' button click
 	def watch
 		@event = Event.find(params[:id])
   	@attendee = User.find(session[:user_id])
@@ -215,6 +173,7 @@ class EventsController < ApplicationController
     end
 	end
 
+	# handle 'neither' button click
 	def neither
 		@event = Event.find(params[:id])
   	@attendee = User.find(session[:user_id])
