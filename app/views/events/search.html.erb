@@ -21,7 +21,7 @@
  <%= form_tag search_events_path,:remote => true, :method => :get do %>
   <p>
     <%= text_field_tag :query, params[:query], :remote => true %>
-     <%= submit_tag "Search!", :remote => true %>
+     <%= submit_tag "Search", :remote => true %>
   </p>
 <% end %>
 
@@ -30,9 +30,9 @@
    <!-- Display Events table (same as Pages index display in Exercise Files)
         todo: We should probably render the _filtered_events partial here for DRY code -->
   <div class = 'events-list'>
-   
+
    <%= render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>
-        
+
   </div>
 
 </div>

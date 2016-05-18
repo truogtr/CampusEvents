@@ -21,7 +21,7 @@
  <%= form_tag search_events_path,:remote => true, :method => :get do %>
   <p>
     <%= text_field_tag :query, params[:query], :remote => true %>
-     <%= submit_tag "Search!", :remote => true %>
+     <%= submit_tag "Search", :remote => true %>
   </p>
 <% end %>
 
@@ -32,28 +32,6 @@
   <div class = 'events-list'>
 
    <%= render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>
-
-
-    <% if false %>
-    <table class="fixed">
-      <tr class="header">
-      <!-- <th>&nbsp;</th> -->
-        <th id = 'col1'>Event Name</th>
-        <th id = 'col2'>Date and Time</th>
-        <th id = 'col3'>Details</th>
-      </tr>
-
-      <% @events.each do |event| %>
-      <tr class="<%= cycle('odd', 'even') %>">
-        <td id = 'event-name'><%= event.event_name %></td>
-        <td id = 'event-date'><%= event.start_time.strftime("%B %d, '%y at %I:%M") %></td>
-        <td class="actions"> <%= link_to("More Information", event_path(event.id), :class => 'action_show') %> </td>
-      </tr>
-      <% end %>
-    </table>
-    <%= will_paginate @events %>
-    <% end  %>
-
 
   </div>
 

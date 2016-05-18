@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20160512193627) do
     t.datetime "end_time"
     t.string   "category",          limit: 255
     t.integer  "creator_id",        limit: 4
-    t.boolean  "visible",                         default: false
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.boolean  "visible",           default: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "events_users", id: false, force: :cascade do |t|

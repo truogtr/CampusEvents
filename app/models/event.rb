@@ -12,7 +12,29 @@ class Event < ActiveRecord::Base
 
   self.per_page = 5
 
+  validates :event_name,        :presence => true,
+                                :length => { :maximum => 50 }
+  validates :location,          :presence => true,
+                                :length => { :maximum => 255 }
+  validates :event_description,
+                                :length => { :maximum => 65535 }
 
+  validate :start_time_in_future
+  validate :end_time_after_start_time
+
+  def start_time_in_future
+    # add an error if the start_time is before the start of current hour
+    if start_time < Time.zone.now.beginning_of_hour
+      errors.add(:start_time, "cannot be in the past.")
+    end
+  end
+
+  def end_time_after_start_time
+    # add an error if end_time is before start_time
+    if end_time < start_time
+      errors.add(:end_time, "cannot be before start time.")
+    end
+  end
 
 
   # Commented out junk that didn't work
