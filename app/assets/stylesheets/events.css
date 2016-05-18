@@ -75,6 +75,12 @@ table.fixed {table-layout:fixed; width:700px;}
     /*width: 100%;*/
 }
 
+.event_info_table th {
+    text-align: right;
+    vertical-align: top;
+    padding-right: 1em;
+}
+
 #attendees_list {
     /*min-height: 2em;*/
     /*padding-bottom: .5em;*/

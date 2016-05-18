@@ -43,6 +43,7 @@ $(document).ready(function() {
 				mod_name = mod_name.substr(0,limit-3)+'...';
 			}
 
+      // TODO make these colors line up with app style
       console.log(event);
       console.log(event.description);
       if (event.description == "watch") {
