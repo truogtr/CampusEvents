@@ -24,16 +24,16 @@
 <% end %>
 
  <!-- Display an Event's information -->
-<table class="event_info_table">
+<table class="event_detail_table">
     <tr>
         <th>When:</th>
         <td>
             <% if @event.start_time.to_date == @event.end_time.to_date %>
-                <%= @event.start_time.strftime("%B %d, %Y: %I:%M%p") %>
-                &mdash; <%= @event.end_time.strftime("%I:%M%p") %>
+                <%= @event.start_time.strftime("%B %d, %Y: %I:%M %p") %>
+                &mdash; <%= @event.end_time.strftime("%I:%M %p") %>
             <% else %>
-                <%= @event.start_time.strftime("%B %d, %Y: %I:%M%p") %>
-                &mdash; <%= @event.end_time.strftime("%B %d, %Y: %I:%M%p") %>
+                <%= @event.start_time.strftime("%B %d, %Y: %I:%M %p") %>
+                &mdash; <%= @event.end_time.strftime("%B %d, %Y: %I:%M %p") %>
             <% end %>
         </td>
     </tr>

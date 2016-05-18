@@ -91,9 +91,6 @@ class EventsController < ApplicationController
       redirect_to event_path(@event.id)
     else
       render("new")
-      # TODO does this reload the new template with the same fields as
-      # previously entered, so students don't have to rewrite everything
-      # about their events?
     end
   end
 
