@@ -44,14 +44,19 @@ $(document).ready(function() {
 			}
 
       // TODO make these colors line up with app style
-      console.log(event);
-      console.log(event.description);
+      var blue_light = "#5486c2";
+      var blue_darker = "#2e5481";
+      // TODO this way of assigning the colors works...but is there a way to
+      // change the colors by assigning each element to a class that we
+      // can modify in events.css.scss?
       if (event.description == "watch") {
-        element.css('background-color', 'blue');
-        element.css('border-color', 'blue');
+        // element.classed('watched_event');
+        element.css('background-color', blue_light);
+        element.css('border-color', blue_light);
       } else if (event.description == "attend") {
-        element.css('background-color', 'green');
-        element.css('border-color', 'green');
+        // element.classed('attended_event');
+        element.css('background-color', blue_darker);
+        element.css('border-color', blue_darker);
       } else {  // other TODO remove this
         element.css('background-color', 'grey');
         element.css('border-color', 'grey');

@@ -27,8 +27,7 @@
 
 
   <div><%#= pluralize(@events.size, 'event') %></div>
-   <!-- Display Events table (same as Pages index display in Exercise Files)
-        todo: We should probably render the _filtered_events partial here for DRY code -->
+   <!-- Display Events table (same as Pages index display in Exercise Files) -->
   <div class = 'events-list'>
 
    <%= render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>

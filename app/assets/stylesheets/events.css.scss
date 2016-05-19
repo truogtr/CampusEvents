@@ -1,3 +1,11 @@
+$blue-light: #5486c2;
+$blue-reg: #4479ba;
+$blue-dark: #356094;
+$blue-darker: #2e5481;
+$blue-darkest: #213b5c;
+
+$red-error: #AA0000;
+
 .search_bar {
     width: 45em;
     margin-top: 1em;
@@ -17,10 +25,10 @@
 
 .buttons_table input {
     background-color:transparent;
-    border: solid 1px #20538D;
+    border: solid 1px $blue-darkest;
     border-radius: 4px;
     font-size: 12px;
-    background: #4479BA;
+    background: $blue-reg;
     color: #FFF;
     padding: .8em 1em;
     width: 100%;
@@ -31,12 +39,12 @@
 .buttons_table input.unselected_button {
     text-shadow: none;
     background: none;
-    color: #4479BA;
+    color: $blue-reg;
 }
 
 .buttons_table input:hover, .buttons_table input:focus {
-    background: #356094;
-    border: solid 1px #2A4E77;
+    background: $blue-dark;
+    border: solid 1px $blue-darkest;
     text-decoration: none;
 }
 
@@ -58,7 +66,7 @@
 }
 
 .odd, .odd a, .odd a.action.show {
-    background: #4479BA;
+    background: $blue-reg;
     color:white;
 }
 
@@ -110,14 +118,28 @@
 #header {
     clear: both;
     text-align: left;
-    color: #F2DC87;
+    // color: #F2DC87;  TODO what is this for?
 }
 
 #header img {
     align: middle;
 }
 
+/* for fullCalendar display */
+/* TODO see if we can get this to work;
+ * see TODO in assets/javascripts.users.js */
+// .watched_event {
+//     background-color: $blue-light;
+//     border-color: $blue-light;
+// }
+//
+// .attended_event {
+//     background-color: $blue-darkest;
+//     border-color: $blue-darkest;
+// }
+
+
 /* for displaying errors (e.g. form submission errors) */
 .field_with_errors { }
-.field_with_errors label { color: #AA0000; }
-.field_with_errors input { border: 1px solid #AA0000; }
+.field_with_errors label { color: $red-error; }
+.field_with_errors input { border: 1px solid $red-error; }

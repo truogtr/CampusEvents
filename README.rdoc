@@ -27,6 +27,9 @@ TODO:
 * make pages responsive (so they look nice on any size page)
 * use sunspot (solr) to enable matching substrings in fulltext search
   * see https://github.com/sunspot/sunspot/wiki/Matching-substrings-in-fulltext-search
+* make it so a given user can't have two open sessions at once (i.e. be logged
+  in in two places at once)
+* in user 'show' view (i.e. user profile), grey out events in the past
 * finish README (see suggestions below)
 
 This README would normally document whatever steps are necessary to get the
