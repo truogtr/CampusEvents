@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# ruby version
+ruby "2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -44,7 +46,8 @@ gem 'sunspot_solr'
 
 gem 'will_paginate', '~> 3.0.6'
 
-
+# postgresql
+gem 'pg'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -65,3 +68,7 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  # for Heroku
+  gem 'rails_12factor'
+end
