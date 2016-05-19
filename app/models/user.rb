@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   # Relate users to events
   # has_and_belongs_to_many :events
-  has_many :event_commitments
+  has_many :event_commitments, :dependent => :destroy
   has_many :events, :through => :event_commitments
 
   #attr_accessor :password_confirmation
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     :default_url => ':placeholder'
 
 
-  #EMAIL_REGEX = /\A[a-z0-9._%+-]+@middlebury.edu\Z/i
+  EMAIL_REGEX = /\A[a-z0-9._%+-]+@middlebury.edu\Z/i
 
   validates :first_name, :presence => true,
                          :length => { :maximum => 25 }
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
                         :length => { :maximum => 50 }
   validates :email, :presence => true,
                     :length => { :maximum => 100 },
-                    #:format => EMAIL_REGEX,  # Commented out for testing
+                    :format => EMAIL_REGEX,  # Commented out for testing
                     :uniqueness => true#,
                     #:confirmation => true
 

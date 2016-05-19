@@ -5,8 +5,10 @@
 <!-- TODO what is this cache clear doing? -->
 <% Rails.cache.clear %>
 
-<% creator = User.find(@event.creator_id) %>
-<% if @user.id == creator.id %>
+<!-- NOTE: use find_by_id() instead of find() to get nil instead of an
+     exception when no User is found -->
+<% creator = User.find_by_id(@event.creator_id) %>
+<% if creator != nil && @user.id == creator.id %>
     <table class = 'buttons_table'>
       <tr>
         <td>
@@ -47,7 +49,11 @@
     </tr>
     <tr>
         <th>Creator:</th>
-        <td><%= link_to "#{creator.first_name} #{creator.last_name}", creator %></td>
+        <% if creator == nil %>
+            <td>(Creator's account has been deleted.)</td>
+        <% else %>
+            <td><%= link_to "#{creator.first_name} #{creator.last_name}", creator %></td>
+        <% end %>
     </tr>
     <tr>
         <!-- Display each attendee of the event-->

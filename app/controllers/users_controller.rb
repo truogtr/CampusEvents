@@ -15,20 +15,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     Rails.logger.debug("!!! #{@user}")
     # @events = @user.events
-    @event_commitments = @user.event_commitments
-    # Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+		# NOTE: use true to not get deleted events!
+		# TODO is 'true' needed here?
+    @event_commitments = @user.event_commitments(true)
     if @user.id == session[:user_id]
-      @event_commitments = @user.event_commitments  # TODO check functionality and colors
-      Rails.logger.debug("!!! #{@user.event_commitments.first.event.event_name}")
+      @event_commitments = @user.event_commitments(true)  # TODO check functionality and colors
     else
-      @event_commitments = @user.event_commitments.where(:description => "attend")
+      @event_commitments = @user.event_commitments(true)
+			@event_commitments = @event_commitments.where(:description => "attend")
     end
   end
 
   def new
-
   	@user = User.new
-
 
     #respond_to do |format|
      # format.html { render :layout => 'access' }
@@ -94,10 +93,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-
     session[:user_id] = nil
     session[:email] = nil
     @user = User.find(params[:id])
+		# NOTE: use destroy, not delete! Destroy invokes destruction of associated
+		# event_commitments, by the dependent => destroy in the User model.
     @user.destroy
     redirect_to root_path
   end

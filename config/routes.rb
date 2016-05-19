@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post :watch
       # get :neither
       post :neither
+      post :edit
       delete :unattend
     end
 
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
 
   end
 
-   match ':controller(/:action(/:id))', :via => [:get, :post]
+  match ':controller(/:action(/:id))', :via => [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

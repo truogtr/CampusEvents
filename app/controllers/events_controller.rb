@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def search
-		@time_range_to_search = Time.zone.now..1000.days.from_now
+		# @time_range_to_search = Time.zone.now..1000.days.from_now
 
     # Rails.logger.debug("@@@@ Search PARAM #{params[:query]}")
     @search = Event.search do
@@ -111,8 +111,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
-     @event = Event.find(params[:id])
-    @event.delete
+    @event = Event.find(params[:id])
+		# NOTE: use destroy, not delete! Destroy invokes destruction of associated
+		# event_commitments, by the dependent => destroy in the Event model.
+		@event.destroy
     redirect_to events_path
   end
 

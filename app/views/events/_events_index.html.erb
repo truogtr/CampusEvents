@@ -5,9 +5,9 @@
 <div class="events index">
 
   <h2>Events On Campus</h2>
-  <!-- Create filter buttons. Handled in filter actions -->
 
-  <table class = 'buttons_table'>
+  <!-- Create filter buttons. Handled in filter actions -->
+  <table class = 'buttons_table event_list_table'>
     <tr>
       <td> <%= button_to "All", filter_events_path, :remote => true, name: "cat"%> </td>
       <td> <%= button_to "Social", filter_events_path, :remote => true, name: "cat"%> </td>
@@ -19,10 +19,10 @@
   </table>
 
  <%= form_tag search_events_path,:remote => true, :method => :get do %>
-  <p>
+  <div class="search_bar">
     <%= text_field_tag :query, params[:query], :remote => true %>
-     <%= submit_tag "Search", :remote => true %>
-  </p>
+    <%= submit_tag "Search", :remote => true %>
+  </div>
 <% end %>
 
 

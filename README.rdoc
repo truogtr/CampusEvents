@@ -24,6 +24,10 @@ TODO:
 * confirm that user wants to leave the page if they've entered text w/o
   submitting a form and want to exit/go back/take a link away from the page
 * make sure layouts in controllers are what we want them to be
+* make pages responsive (so they look nice on any size page)
+* use sunspot (solr) to enable matching substrings in fulltext search
+  * see https://github.com/sunspot/sunspot/wiki/Matching-substrings-in-fulltext-search
+* finish README (see suggestions below)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

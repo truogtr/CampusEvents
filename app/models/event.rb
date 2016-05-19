@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   # relate events to users
   # has_and_belongs_to_many :users
-  has_many :event_commitments
+  has_many :event_commitments, :dependent => :destroy
   has_many :users, :through => :event_commitments
 
   searchable do
