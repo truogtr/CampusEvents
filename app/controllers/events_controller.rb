@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   # this uses views/layouts.application.html.erb which links the asset folder
   # we should probably contain this so that we have differnt user and an event layouts.
-	layout 'events'
+	layout 'application'
   before_action :confirm_logged_in
 
   # get events ordered by start time for index page
@@ -27,7 +27,8 @@ class EventsController < ApplicationController
 
     @filtered = @search.results.paginate(:page => params[:page], :per_page => 5)
 
-    #maintain query
+    # maintain query
+		# Rails will determine the desired response format and respond accordingly
     respond_to do |format|
       format.js
       format.html {}

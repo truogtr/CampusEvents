@@ -2,7 +2,6 @@
 <!-- Partial that displays the filtered events -->
 <table class="event_list_table">
   <tr class="header">
-  <!-- <th>&nbsp;</th> -->
     <th>Event Name</th>
     <th>Start</th>
     <th>End</th>
@@ -11,7 +10,7 @@
 
     <% if @filtered.empty? %>
         <tr class="odd">
-            <td colspan="4">There are currently no events for this category or search.</td>
+            <td colspan="4">There are currently no upcoming events for this category or search.</td>
         </tr>
     <% else %>
         <% @filtered.each do |event| %>

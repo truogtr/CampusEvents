@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       #get :calendar
       get :delete
+      get :created_events
     end
   end
 
@@ -22,11 +23,8 @@ Rails.application.routes.draw do
   resources :events do
     member do
       get :delete
-      # get :attend
       post :attend
-      # get :watch
       post :watch
-      # get :neither
       post :neither
       post :edit
       delete :unattend

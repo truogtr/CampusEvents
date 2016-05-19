@@ -1,0 +1,9 @@
+<% @page_title = "Events created by " + @user.first_name %>
+
+<!-- Display table of events created by the user (@filtered is set in the
+  users_controller, action created_events) -->
+<div class = 'events-list'>
+
+  <%= render(:partial => 'filtered_events', :locals => { :filtered => @filtered }) %>
+
+</div>

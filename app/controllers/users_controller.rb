@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   # this uses views/layouts.application.html.erb which links the asset folder
-  # we should probably contain this so that we have differnt user and an event layouts.
+  # we should probably contain this so that we have differnet user and an event layouts.
 	layout :resolve_layout
 
 	before_action :confirm_logged_in, :except => [:new, :create]
@@ -25,6 +25,15 @@ class UsersController < ApplicationController
 			@event_commitments = @event_commitments.where(:description => "attend")
     end
   end
+
+	def created_events
+		@user = User.find(session[:user_id])
+
+		Rails.logger.debug("!!!! session user.id: #{@user.id}")
+		@filtered = Event.where(:creator_id => @user.id)
+										 .order(start_time: :asc)
+										 .paginate(:page => params[:page])
+	end
 
   def new
   	@user = User.new
@@ -127,7 +136,7 @@ class UsersController < ApplicationController
     when "new", "create"
       "access"
     else
-      "users"
+      "application"
     end
   end
 

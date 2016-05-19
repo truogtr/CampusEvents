@@ -5,9 +5,9 @@
     <table class="profile_header">
       <tr>
         <td>
-            
+
             <%= image_tag @user.avatar.url(:medium), :class => 'user_img' %>
-          
+
         </td>
         <td>
             <h1> <%= @user.first_name + " " + @user.last_name + "'s Profile" %> </h1>
@@ -25,4 +25,4 @@
   		  formats it in a way that fullCalendar can understand. See fullCalendar tutorial -->
 <div id='calendar' data-calendar = '<%= @user.id %>'></div>
 
- <!--todo: make this page nicer: perhaps move calendar to a different page and display the rest of the user info -->
+ <!-- TODO make this page nicer: perhaps move calendar to a different page and display the rest of the user info -->
