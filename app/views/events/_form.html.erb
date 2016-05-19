@@ -1,7 +1,7 @@
 <%= error_messages_for(@event) %>
 
  <!-- Form for a new event. Will also be used for edit -->
-<table summary="Event form fields">
+<table class="form_table" summary="Event form fields">
   <tr>
     <th><%= f.label(:event_name) %></th>
     <td><%= f.text_field(:event_name) %></td>
@@ -11,7 +11,7 @@
     <td><%= f.text_field(:location) %></td>
   </tr>
   <tr>
-    <th><%= f.label(:event_description) %></th>
+    <th><%= f.label(:event_description, 'Description') %></th>
     <td><%= f.text_area(:event_description, :size => '40x10')%></td>
   </tr>
   <tr>

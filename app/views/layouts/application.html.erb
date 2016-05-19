@@ -20,12 +20,15 @@
         </div>
     <% end %>
 
-     <div>
-        <%= link_to("My Profile", user_path(session[:user_id])) %> |
-        <%= link_to("Create an Event", new_event_path) %> |
-        <%= link_to("View Events", events_path) %> |
-        <%= link_to "Sign out", :controller => 'access', :action => 'logout' %>
-    </div>
+    <table class = 'menu_table'>
+      <tr>
+        <td> <%= link_to("My Profile", user_path(session[:user_id]))%> </td>
+        <td> <%= link_to("Create an Event", new_event_path)%> </td>
+        <td> <%= link_to("Find Events", events_path)%> </td>
+        <td> <%= link_to("My Created Events", myevents_user_path(session[:user_id]))%> </td>
+        <td> <%= link_to("Sign out", :controller => 'access', :action => 'logout')%> </td>
+      </tr>
+    </table>
 
     <%= yield %>
 

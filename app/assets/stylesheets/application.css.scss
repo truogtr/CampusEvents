@@ -18,6 +18,7 @@
 $font-stack: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
 /* $font-stack: "Lucida Sans Unicode", "Lucida Grande", sans-serif; */
 /* Using Monochromatic Color scheme here: http://www.colorhexa.com/356094 */
+$blue-lighter: #8caed6;
 $blue-light: #5486c2;
 $blue-reg: #4479ba;
 $blue-dark: #356094;
@@ -36,8 +37,9 @@ $blue-darkest: #213b5c;
 
 body {
     font-family: $font-stack;
-    margin-left: 3em;
-    margin-right: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 45em;
 }
 
 a {
@@ -54,10 +56,61 @@ a:visited {
     color: $blue-darker;
 }
 
+h1,h2,h3 {
+    text-align: center;
+}
+
 h1 {
     margin: 0;
 }
 
 h3 {
     margin: .4em;
+}
+
+.form_table {
+    width: 40em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form_table th {
+    text-align: right;
+    vertical-align: text-top;
+    padding-left: 0em;
+
+}
+
+.form_table input, textarea {
+    width: 100%;
+}
+
+.menu_table {
+    width: 45em;
+    height: 2em;
+}
+
+.menu_table a {
+    display: inline-block;
+    height:100%;
+    width:99%;
+    border: solid 1px $blue-light;
+    background: $blue-lighter;
+    border-radius: 4px;
+    padding-top: .5em;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#calendar {
+    width: 45em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header img {
+    display: block;
+    margin: 0 auto;
 }

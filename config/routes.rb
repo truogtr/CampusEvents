@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     member do
       #get :calendar
       get :delete
-      get :created_events
+      get :myevents
     end
   end
 

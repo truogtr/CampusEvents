@@ -65,6 +65,12 @@ $(document).ready(function() {
       element.find('.fc-title').append("<br/>" + mod_name);
     },
 
+    header: {
+                     left: 'title',
+                     center: 'agendaDay,agendaWeek,month',
+                     right: 'today prev,next'
+           },
+
     views: {
       month: { // name of view
             //titleFormat: 'YYYY, MM, DD'

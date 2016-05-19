@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     end
   end
 
-	def created_events
+	def myevents
 		@user = User.find(session[:user_id])
 
 		Rails.logger.debug("!!!! session user.id: #{@user.id}")
