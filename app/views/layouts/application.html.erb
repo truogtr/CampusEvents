@@ -10,7 +10,7 @@
 </head>
 <body >
    <div id="header">
-     <img src="/assets/Middlebury_Panthers_logo.png" alt="Mountain View" style="width:175px;height:75px;">
+       <%= image_tag("Middlebury_Panthers_logo.png", alt: "Panthers Logo", height: '75px', width: '175px') %>
     </div>
 
     <% if !flash[:notice].blank? %>

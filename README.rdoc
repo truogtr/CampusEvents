@@ -45,20 +45,32 @@ TODO FOR DEPLOYMENT:
 FOR DEVELOPMENT:
 
 * have config/local_env.yml with the following in it:
-S3_BUCKET_NAME: 'yourbucketname'
-AWS_ACCESS_KEY_ID: 'your_access_key_id'
-AWS_SECRET_ACCESS_KEY: 'your_secret_access_key'
-AWS_REGION: 'your_aws_region'
+  S3_BUCKET_NAME: 'yourbucketname'
+  AWS_ACCESS_KEY_ID: 'your_access_key_id'
+  AWS_SECRET_ACCESS_KEY: 'your_secret_access_key'
+  AWS_REGION: 'your_aws_region'
 
 
 FOR DEPLOYING:
 
 * heroku addons:create websolr
 * add the following to the heroku config (see https://devcenter.heroku.com/articles/paperclip-s3):
-$ heroku config:set S3_BUCKET_NAME=your_bucket_name
-$ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
-$ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key
-$ heroku config:set AWS_REGION=your_aws_region
+  $ heroku config:set S3_BUCKET_NAME=your_bucket_name
+  $ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
+  $ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key
+  $ heroku config:set AWS_REGION=your_aws_region
+* add the following for static files to be served unless/until Apache or NGINX
+takes care of it for us.
+  $ heroku config:set RAILS_SERVE_STATIC_FILES=true
+* before committing and pushing to heroku:
+  $ bin/rake assets:precompile
+  * and be sure to point to static assets using AssetTagHelpers like image_tag,
+    javascript_include_tag, and stylesheet_link_tag rather than putting them
+    straight into the html with html tags! Something like the following will not
+    work in production! :
+    <!-- <img src="/assets/Middlebury_Panthers_logo.png" alt="Mountain View" style="width:175px;height:75px;"> -->
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -86,5 +98,3 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
-
-Is this needed?: bin/rake assets:precompile
