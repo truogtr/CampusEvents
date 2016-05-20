@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2'
 
 gem 'paperclip', '~> 4.2.0'
 

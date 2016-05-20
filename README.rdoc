@@ -20,10 +20,8 @@ To run locally, run these from the root of the app:
 
 TODO:
 
-* redirect pages or somehow show a good error when forms fail
 * confirm that user wants to leave the page if they've entered text w/o
   submitting a form and want to exit/go back/take a link away from the page
-* make sure layouts in controllers are what we want them to be
 * make pages responsive (so they look nice on any size page)
 * use sunspot (solr) to enable matching substrings in fulltext search
   * see https://github.com/sunspot/sunspot/wiki/Matching-substrings-in-fulltext-search
@@ -31,6 +29,20 @@ TODO:
   in in two places at once)
 * in user 'show' view (i.e. user profile), grey out events in the past
 * finish README (see suggestions below)
+
+TODO FOR DEPLOYMENT:
+
+* get solr working on heroku
+* get paperclip working on heroku (with AWS)
+  * https://devcenter.heroku.com/articles/paperclip-s3#configuration
+
+FOR DEVELOPMENT:
+
+* have config/local_env.yml with the following in it:
+S3_BUCKET_NAME: 'yourbucketname'
+AWS_ACCESS_KEY_ID: 'your_access_key_id'
+AWS_SECRET_ACCESS_KEY: 'your_secret_access_key'
+(TODO do we need to specify AWS_REGION ?)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -58,3 +70,5 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+Is this needed?: bin/rake assets:precompile
