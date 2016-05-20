@@ -1,54 +1,29 @@
 == README
 
-Made with lots of help from this tutorial at Lynda.com, by Kevin Skoglund:
+* A web application made by Trevor Truog and Jamie Hand with Ruby on Rails 4
+for our final project for CS 701. (And for fun!) Middlebury College, Spring 2016.
+* Made with lots of help from this tutorial at Lynda.com, by Kevin Skoglund:
 http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
 
-Requirements:
+SYSTEM REQUIREMENTS:
 
 * imagemagick
 
-To run locally, run these from the root of the app:
 
-(NOTE: Any time ```rake``` is used, you may need ```bin/rake```)
-
-* rake db:migrate (only needed if your database isn't up to date)
-* rake sunspot:solr:start
-  * rake sunspot:reindex
-    * do this any time after changing a "searchable" definition for a model
-* rails s
-
-
-TODO:
-
-* confirm that user wants to leave the page if they've entered text w/o
-  submitting a form and want to exit/go back/take a link away from the page
-* make pages responsive (so they look nice on any size page)
-* use sunspot (solr) to enable matching substrings in fulltext search
-  * see https://github.com/sunspot/sunspot/wiki/Matching-substrings-in-fulltext-search
-* make it so a given user can't have two open sessions at once (i.e. be logged
-  in in two places at once)
-* in user 'show' view (i.e. user profile), grey out events in the past
-* finish README (see suggestions below)
-
-TODO FOR DEPLOYMENT:
-
-* get solr working on heroku -- or switch to Bonsai with Elastic Search because
-  websolr is $20/month minimum.
-    * http://stackoverflow.com/questions/19674619/heroku-rails-websolr-sunspot-is-not-free-in-production
-    * https://devcenter.heroku.com/articles/websolr#sunspot-for-ruby-on-rails
-* Explicitly declare how to boot our server process via a Procfile.
-  * https://devcenter.heroku.com/articles/ruby-default-web-server
-* get static files serving
-  * http://stackoverflow.com/questions/14519997/actioncontrollerroutingerror-no-route-matches-get-assets-images-control-t
-
-
-FOR DEVELOPMENT:
+TO RUN LOCALLY:
 
 * have config/local_env.yml with the following in it:
   S3_BUCKET_NAME: 'yourbucketname'
   AWS_ACCESS_KEY_ID: 'your_access_key_id'
   AWS_SECRET_ACCESS_KEY: 'your_secret_access_key'
   AWS_REGION: 'your_aws_region'
+* run these from the root of the app:
+  * (NOTE: Any time ```rake``` is used, you may need ```bin/rake```)
+  * rake db:migrate (only needed if your database isn't up to date)
+  * rake sunspot:solr:start
+    * rake sunspot:reindex
+      * do this any time after changing a "searchable" definition for a model
+  * rails s
 
 
 FOR DEPLOYING:
@@ -71,6 +46,29 @@ takes care of it for us.
     <!-- <img src="/assets/Middlebury_Panthers_logo.png" alt="Mountain View" style="width:175px;height:75px;"> -->
 
 
+TODO:
+
+* confirm that user wants to leave the page if they've entered text w/o
+  submitting a form and want to exit/go back/take a link away from the page
+* make pages responsive (so they look nice on any size page)
+* use sunspot (solr) to enable matching substrings in fulltext search
+  * see https://github.com/sunspot/sunspot/wiki/Matching-substrings-in-fulltext-search
+* make it so a given user can't have two open sessions at once (i.e. be logged
+  in in two places at once)
+* in user 'show' view (i.e. user profile), grey out events in the past
+* finish README (see suggestions below)
+
+TODO FOR DEPLOYMENT:
+
+* get solr working on heroku -- or switch to Bonsai with Elastic Search because
+  websolr is $20/month minimum.
+    * http://stackoverflow.com/questions/19674619/heroku-rails-websolr-sunspot-is-not-free-in-production
+    * https://devcenter.heroku.com/articles/websolr#sunspot-for-ruby-on-rails
+* Explicitly declare how to boot our server process via a Procfile.
+  * https://devcenter.heroku.com/articles/ruby-default-web-server
+
+
+BOILERPLATE NOTES/THINGS TO CONSIDER ADDING:
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
