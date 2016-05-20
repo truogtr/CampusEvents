@@ -32,9 +32,15 @@ TODO:
 
 TODO FOR DEPLOYMENT:
 
-* get solr working on heroku
-* get paperclip working on heroku (with AWS)
-  * https://devcenter.heroku.com/articles/paperclip-s3#configuration
+* get solr working on heroku -- or switch to Bonsai with Elastic Search because
+  websolr is $20/month minimum.
+    * http://stackoverflow.com/questions/19674619/heroku-rails-websolr-sunspot-is-not-free-in-production
+    * https://devcenter.heroku.com/articles/websolr#sunspot-for-ruby-on-rails
+* Explicitly declare how to boot our server process via a Procfile.
+  * https://devcenter.heroku.com/articles/ruby-default-web-server
+* get static files serving
+  * http://stackoverflow.com/questions/14519997/actioncontrollerroutingerror-no-route-matches-get-assets-images-control-t
+
 
 FOR DEVELOPMENT:
 
@@ -42,7 +48,17 @@ FOR DEVELOPMENT:
 S3_BUCKET_NAME: 'yourbucketname'
 AWS_ACCESS_KEY_ID: 'your_access_key_id'
 AWS_SECRET_ACCESS_KEY: 'your_secret_access_key'
-(TODO do we need to specify AWS_REGION ?)
+AWS_REGION: 'your_aws_region'
+
+
+FOR DEPLOYING:
+
+* heroku addons:create websolr
+* add the following to the heroku config (see https://devcenter.heroku.com/articles/paperclip-s3):
+$ heroku config:set S3_BUCKET_NAME=your_bucket_name
+$ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
+$ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key
+$ heroku config:set AWS_REGION=your_aws_region
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
