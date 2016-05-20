@@ -73,7 +73,9 @@
 
 
 <%= button_to "Delete Account", {:controller => :users,
-      :action => 'destroy', :id => @user.id }, :method => :delete, data: { confirm: "Are you sure?" }  %>
+      :action => 'destroy', :id => @user.id }, :method => :delete, data: { confirm: "Are you sure?" },
+	  :class => 'destroy_button'  %>
+
 </div>
 
 

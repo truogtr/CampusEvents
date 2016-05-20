@@ -1,5 +1,7 @@
 <% @page_title = "Events created by " + @user.first_name %>
 
+<h2> <%= "Events created by " + @user.first_name + " " + @user.last_name %> </h2>
+
 <!-- Display table of events created by the user (@filtered is set in the
   users_controller, action myevents) -->
 <div class = 'events-list'>

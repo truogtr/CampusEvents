@@ -9,7 +9,7 @@
      exception when no User is found -->
 <% creator = User.find_by_id(@event.creator_id) %>
 <% if creator != nil && @user.id == creator.id %>
-    <table class = 'buttons_table'>
+    <table class = 'buttons_table event_creator_options'>
       <tr>
         <td>
             <%= button_to "Edit Event", edit_event_path(@event),

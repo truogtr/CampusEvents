@@ -58,7 +58,7 @@ $red-error: #AA0000;
 /* keep uniform width for the "radio" selection buttons */
 .buttons_table input.unselected_button,
 .buttons_table input.selected_button {
-    width: 90px;
+    width: 100%;
 }
 
 .buttons_table input.user_options{
@@ -143,3 +143,9 @@ $red-error: #AA0000;
 .field_with_errors { }
 .field_with_errors label { color: $red-error; }
 .field_with_errors input { border: 1px solid $red-error; }
+
+/* colorint for destroy buttons */
+input.destroy_button  {
+    background: $red-error;
+    border: solid 1px $red-error;
+}

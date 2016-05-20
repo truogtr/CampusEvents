@@ -1,13 +1,14 @@
 == README
 
 * A web application made by Trevor Truog and Jamie Hand with Ruby on Rails 4
-for our final project for CS 701. (And for fun!) Middlebury College, Spring 2016.
+  for our final project for CS 701. (And for fun!) Middlebury College, Spring 2016.
 * Made with lots of help from this tutorial at Lynda.com, by Kevin Skoglund:
-http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
+  http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
 
 SYSTEM REQUIREMENTS:
 
 * imagemagick
+* psql
 
 
 TO RUN LOCALLY:
@@ -18,7 +19,7 @@ TO RUN LOCALLY:
   AWS_SECRET_ACCESS_KEY: 'your_secret_access_key'
   AWS_REGION: 'your_aws_region'
 * run these from the root of the app:
-  * (NOTE: Any time ```rake``` is used, you may need ```bin/rake```)
+  * (NOTE: Any time `rake` is used, you may need `bin/rake`)
   * rake db:migrate (only needed if your database isn't up to date)
   * rake sunspot:solr:start
     * rake sunspot:reindex
@@ -35,7 +36,7 @@ FOR DEPLOYING:
   $ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key
   $ heroku config:set AWS_REGION=your_aws_region
 * add the following for static files to be served unless/until Apache or NGINX
-takes care of it for us.
+  takes care of it for us.
   $ heroku config:set RAILS_SERVE_STATIC_FILES=true
 * before committing and pushing to heroku:
   $ bin/rake assets:precompile
@@ -56,7 +57,10 @@ TODO:
 * make it so a given user can't have two open sessions at once (i.e. be logged
   in in two places at once)
 * in user 'show' view (i.e. user profile), grey out events in the past
-* finish README (see suggestions below)
+* finish README (see boilerplate suggestions below)
+* password recovery
+* email confirmation/validation upon creating a new account
+* replace panther at top of page with CampusEvents logo
 
 TODO FOR DEPLOYMENT:
 
