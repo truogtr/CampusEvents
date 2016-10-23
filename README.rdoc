@@ -4,6 +4,11 @@
   for our final project for CS 701. (And for fun!) Middlebury College, Spring 2016.
 * Made with lots of help from this tutorial at Lynda.com, by Kevin Skoglund:
   http://www.lynda.com/Ruby-Rails-tutorials/Ruby-Rails-4-Essential-Training/139989-2.html
+* Unfortunately,
+creating and searching for events does not currently work in the deployed Heroku
+version, because the sunspot solr gem (which we use for searching in the app)
+requires a paid Heroku add-on (Websolr) to work. However, everything works
+well if you run the app locally.
 
 SYSTEM REQUIREMENTS:
 
@@ -57,7 +62,6 @@ TODO:
 * make it so a given user can't have two open sessions at once (i.e. be logged
   in in two places at once)
 * in user 'show' view (i.e. user profile), grey out events in the past
-* finish README (see boilerplate suggestions below)
 * password recovery
 * email confirmation/validation upon creating a new account
 * replace panther at top of page with CampusEvents logo
@@ -70,33 +74,3 @@ TODO FOR DEPLOYMENT:
     * https://devcenter.heroku.com/articles/websolr#sunspot-for-ruby-on-rails
 * Explicitly declare how to boot our server process via a Procfile.
   * https://devcenter.heroku.com/articles/ruby-default-web-server
-
-
-BOILERPLATE NOTES/THINGS TO CONSIDER ADDING:
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
